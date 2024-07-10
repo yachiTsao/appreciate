@@ -1,0 +1,18 @@
+{
+  "title": "標題",
+  "home": "首頁",
+  "landingPage": "登陸頁面",
+  "functionOne": "功能一",
+  "functionTwo": "功能二",
+  "functionThree": "功能三",
+  "functionFour": "功能四",
+  "functionFive": "功能五",
+  "view": "查看",
+  "edit": "编辑",
+  "deleted": "删除",
+  "number": "編號",
+  "name": "名稱",
+  "loading": "加載中...",
+  "noData": "無數據",
+  "itemsPerPage": "每頁項目數"
+}
