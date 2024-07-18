@@ -21,30 +21,30 @@ const router = createRouter({
       component: () => import("../pages/index.vue"),
     },
     {
-      path: "/function/one",
-      name: "function one",
+      path: "/list",
+      name: "list",
       component: () => import("../pages/FunctionOne.vue"),
     },
     {
-      path: "/function/two",
-      name: "function/two",
+      path: "/detail",
+      name: "detail",
       component: () => import("../pages/FunctionTwo.vue"),
     },
     {
-      path: "/function/three",
-      name: "function three",
+      path: "/overview",
+      name: "overview",
       component: () => import("../pages/FunctionThree.vue"),
     },
     {
-      path: "/function/four",
-      name: "function four",
+      path: "/contact",
+      name: "contact",
       component: () => import("../pages/FunctionFour.vue"),
     },
-    {
-      path: "/function/five",
-      name: "function five",
-      component: () => import("../pages/FunctionFive.vue"),
-    }
+    // {
+    //   path: "/function/five",
+    //   name: "function five",
+    //   component: () => import("../pages/FunctionFive.vue"),
+    // }
   ]
 })
 

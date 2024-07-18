@@ -7,33 +7,24 @@
           <span class="font-weight-bold"> {{ $t("general.title") }} </span>
         </div>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-tabs v-model="tab">
+      <v-tabs v-model="tab" align-tabs="center">
         <v-tab
           v-for="item in items"
           :key="item.value"
           :text="$t(item.title)"
           :value="item.value"
-          @click="
-            item.value === 'HOME'
-              ? router.push('/')
-              : router.push(
-                  `/function/${item.value.toLocaleLowerCase()}`,
-                )
-          "
+          @click="router.push(item.path)"
         ></v-tab>
       </v-tabs>
-      <v-spacer></v-spacer>
-      <v-layout class="px-4 align-center justify-end">
         <div class="pr-2">
-          <v-btn icon>
+          <v-btn icon @click="toggleTheme">
             <v-icon>{{
               darkMode ? "mdi-weather-night" : "mdi-weather-sunny"
             }}</v-icon>
           </v-btn>
         </div>
         <div
-          class="d-flex align-center justify-center text-gray-20 custom-switch-language"
+          class="d-flex align-center justify-end custom-switch-language"
         >
           <v-icon size="20" class="pr-2">mdi-web</v-icon>
           <v-select
@@ -57,10 +48,6 @@
             </template>
           </v-select>
         </div>
-        <v-btn icon density="comfortable">
-          <v-icon icon="mdi:mdi-help-circle-outline" size="20"></v-icon>
-        </v-btn>
-      </v-layout>
     </v-toolbar>
   </div>
 </template>
@@ -68,6 +55,7 @@
 <script setup lang="ts">
 import router from "@/router";
 import { ref, reactive, watch, onMounted } from "vue";
+import { useTheme } from 'vuetify'
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/store";
 import { storeToRefs } from "pinia";
@@ -79,44 +67,51 @@ const items = [
   {
     title: "general.home",
     value: "HOME",
+    path: '/'
   },
   {
     title: "general.functionOne",
-    value: "ONE",
+    value: "list",
+    path: '/list'
   },
   {
     title: "general.functionTwo",
-    value: "TWO",
+    value: "detail",
+    path: '/detail'
   },
   {
     title: "general.functionThree",
-    value: "THREE",
+    value: "overview",
+    path: '/overview'
   },
   {
     title: "general.functionFour",
-    value: "FOUR",
+    value: "contact",
+    path: '/contact'
   },
-  {
-    title: "general.functionFive",
-    value: "FIVE",
-  },
+  // {
+  //   title: "general.functionFive",
+  //   value: "FIVE",
+  // },
 ];
 const authStore = useAuthStore();
 const { lang: authLang, theme: authTheme } = storeToRefs(authStore);
 let lang = ref(authLang)
-let darkMode = ref(authTheme)
+let theme = useTheme()
+let themeMode = ref(authTheme)
+let darkMode = themeMode.value === 'Dark'
 const langOpts = reactive([
   { value: "en-US", title: "English" },
   { value: "zh-TW", title: "中文(繁體)" },
   { value: "zh-CN", title: "中文(簡體)" },
 ])
 function toggleTheme() {
-  theme.global.name.value = themeMode.value === 'Dark' ? 'customDarkTheme' : 'customLightTheme'
-  // theme.global.name.value = theme.global.current.value.dark ? 'customLightTheme' : 'customDarkTheme'
-  // darkMode = theme.global.name.value === 'customDarkTheme'
+  theme.global.name.value = theme.global.current.value.dark ? 'lightTheme' : 'darkTheme'
+  darkMode = theme.global.name.value === 'darkTheme'
+  localStorage.setItem("theme", darkMode ? 'Dark' : 'Light')
 }
 function initTab() {
-  tab.value = route.path === '/' ? 'HOME' : route.path.split('/')[2].toUpperCase()
+  tab.value = route.path === '/' ? 'HOME' : route.path
 }
 watch(
   lang,
@@ -129,7 +124,7 @@ watch(
   }
 )
 watch(() => route.path, (newVal) => {
-  tab.value = route.path === '/' ? 'HOME' : route.path.split('/')[2].toUpperCase()
+  tab.value = route.path === '/' ? 'HOME' : route.path
 },
 {
   immediate: true,
@@ -137,6 +132,7 @@ watch(() => route.path, (newVal) => {
 })
 onMounted(() => {
   initTab()
+  theme.global.name.value = themeMode.value === 'Dark' ? 'darkTheme' : 'lightTheme'
 })
 </script>
 <style lang="scss" scoped>
@@ -154,7 +150,7 @@ onMounted(() => {
   --v-input-padding-top: 0 !important;
 }
 .custom-switch-language {
-  min-width: 30vh;
+  min-width: 8vw;
 }
 .v-btn.v-btn--density-default{
   height: 48px;

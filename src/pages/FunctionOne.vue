@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-sheet width="85%" class="py-8 mx-auto" color="transparent">
-      Table List
+      {{ $t('general.list') }}
     <VDataTable
       :headers="headers"
       :items="items"
@@ -20,13 +20,18 @@ import { ref } from 'vue'
 import VDataTable from '@/components/general/VDataTable.vue'
 let loading = ref(true)
 const headers = ref([
-  { title: 'general.number', align: 'start', key: 'number' },
+  { title: 'general.date', align: 'start', key: 'date' },
   { title: 'general.name', align: 'start', key: 'name' },
+  { title: 'general.type', align: 'start', key: 'type' },
+  { title: 'general.dollar', align: 'start', key: 'dollar' },
   { title: '', align: 'end', key: 'actions', sortable: false }
 ])
 const items = ref([
-  { number: 1, name: 'John Doe' },
-  { number: 2, name: 'Jane Doe' }
+  { date: '2024/07/18', name: 'Pizza', type: 'dinner', dollar: 50 },
+  { date: '2024/07/19', name: '滷肉飯', type: 'dinner', dollar: 50 },
+  { date: '2024/07/20', name: '牛肉麵', type: 'lunch', dollar: 100 },
+  { date: '2024/07/21', name: '麻辣火鍋', type: 'dinner', dollar: 200 },
+  { date: '2024/07/22', name: '炒飯', type: 'lunch', dollar: 80}
 ])
 function goToAction(number: number, action: string) {
   switch (action) {

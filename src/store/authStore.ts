@@ -9,7 +9,7 @@ export const useAuthStore = defineStore({
     user: null,
     lang: localStorage.getItem('lang') ?? browserLang,
     // if you want to change the theme, you can set the value to 'Light'.
-    theme: 'Light',
+    theme: localStorage.getItem('theme') ?? 'Dark',
     returnUrl: null
   }),
   actions: {

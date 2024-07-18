@@ -1,18 +1,22 @@
 {
   "title": "标题",
   "home": "首页",
-  "landingPage": "登陆页面",
-  "functionOne": "功能一",
-  "functionTwo": "功能二",
-  "functionThree": "功能三",
-  "functionFour": "功能四",
+  "landingPage": "登录页面",
+  "functionOne": "列表",
+  "functionTwo": "详情",
+  "functionThree": "概览",
+  "functionFour": "联系我们",
   "functionFive": "功能五",
   "view": "查看",
   "edit": "编辑",
   "deleted": "删除",
   "number": "编号",
   "name": "名称",
+  "type": "类型",
+  "dollar": "金额",
+  "date": "日期",
   "loading": "加载中...",
   "noData": "无数据",
-  "itemsPerPage": "每页项目数"
+  "itemsPerPage": "每页项目数",
+  "list": "列表"
 }

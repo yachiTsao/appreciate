@@ -42,7 +42,7 @@ span,
 //
 .ellipsis-multiple {
   text-overflow: ellipsis;
-  overflow: hidden;
+  overflow: auto;
   display: -webkit-box;
   -webkit-box-orient: vertical;
 
