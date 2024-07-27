@@ -16,7 +16,7 @@ const {
   gray90,
   gray100
 }: ColorVariables = {
-  primaryBlue: '#2872B6',
+  primaryBlue: '#7EB3F9',
   primaryDarkBlue: '#003A70',
   primaryGreen: '#0FADB7',
   primaryOrange: '#FF9F5A',
@@ -24,7 +24,7 @@ const {
   highlightGreen: '#17B05D',
   gray0: '#1E282C',
   gray20: '#556675',
-  gray30: '#8E969E',
+  gray30: '#DCEDFD',
   gray40: '#A9B6C3',
   gray50: '#394552',
   gray60: '#C4D7E9',
@@ -91,7 +91,7 @@ export const lightColors = {
   filter: gray80,
   'on-filter': gray20,
   label: gray90,
-  'on-label': gray30,
+  'on-label': gray40,
   dropdown: gray80,
   'on-dropdown': gray20,
   field: gray80,

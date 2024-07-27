@@ -51,6 +51,10 @@ span,
   // height: 42px;
   line-height: 20px;
 }
+// card background & sheet background
+.v-custom-background {
+  background: rgb(var(--v-theme-gray-30), 0.6) !important;
+}
 // custom filter & select style
 .v-custom-filter {
   max-width: fit-content;

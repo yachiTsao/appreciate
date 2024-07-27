@@ -7,16 +7,28 @@
   "functionThree": "概覽",
   "functionFour": "聯絡我們",
   "functionFive": "功能五",
+  "create": "新增",
   "view": "查看",
   "edit": "編輯",
   "deleted": "刪除",
-  "number": "編號",
-  "name": "名稱",
+  "detail": "詳情",
+  "month": "月份",
   "type": "類型",
   "dollar": "金額",
+  "payment": "付款",
+  "search": "搜索",
   "date": "日期",
   "loading": "加載中...",
   "noData": "無數據",
   "itemsPerPage": "每頁項目數",
-  "list": "列表"
+  "console": "控制台",
+  "createDetail": "新增詳情",
+  "viewDetail": "查看詳情",
+  "editDetail": "編輯詳情",
+  "cancel": "取消",
+  "update": "更新",
+  "deletionDialog": {
+    "title": "確認刪除？",
+    "context": "刪除是不可逆的，\n請確認是否要繼續。"
+  }
 }

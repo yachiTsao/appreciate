@@ -25,11 +25,11 @@ const router = createRouter({
       name: "list",
       component: () => import("../pages/FunctionOne.vue"),
     },
-    {
-      path: "/detail",
-      name: "detail",
-      component: () => import("../pages/FunctionTwo.vue"),
-    },
+    // {
+    //   path: "/detail",
+    //   name: "detail",
+    //   component: () => import("../pages/FunctionTwo.vue"),
+    // },
     {
       path: "/overview",
       name: "overview",

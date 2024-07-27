@@ -14,6 +14,7 @@
           :text="$t(item.title)"
           :value="item.value"
           @click="router.push(item.path)"
+          class="v-text-h3"
         ></v-tab>
       </v-tabs>
         <div class="pr-2">
@@ -74,11 +75,11 @@ const items = [
     value: "list",
     path: '/list'
   },
-  {
-    title: "general.functionTwo",
-    value: "detail",
-    path: '/detail'
-  },
+  // {
+  //   title: "general.functionTwo",
+  //   value: "detail",
+  //   path: '/detail'
+  // },
   {
     title: "general.functionThree",
     value: "overview",

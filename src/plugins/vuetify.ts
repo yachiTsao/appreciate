@@ -37,4 +37,22 @@ export default createVuetify({
       lightTheme
     }
   },
+  defaults: {
+    VBtn: {
+      elevation: 0,
+      class: 'text-none',
+      style: {
+        'letter-spacing': 'normal'
+      }
+    },
+    VListItemTitle: {
+      class: 'v-text-body-2'
+    },
+    VListItem: {
+      class: 'v-text-body-2',
+      style: {
+        'min-height': '36px'
+      }
+    },
+  }
 });

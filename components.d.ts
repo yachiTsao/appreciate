@@ -23,5 +23,14 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SideMenu: typeof import('./src/components/SideMenu.vue')['default']
     VDataTable: typeof import('./src/components/general/VDataTable.vue')['default']
+    VDeletionAlert: typeof import('./src/components/general/VDeletionAlert.vue')['default']
+    VDialogLayout: typeof import('./src/components/general/VDialogLayout.vue')['default']
+    VFilterGroupSelect: typeof import('./src/components/general/VFilterGroupSelect.vue')['default']
+    VFilterSelect: typeof import('./src/components/general/VFilterSelect.vue')['default']
+    VFilterSelectLayout: typeof import('./src/components/general/VFilterSelectLayout.vue')['default']
+    VLabel: typeof import('./src/components/general/VLabel.vue')['default']
+    VMultipleGroupSelect: typeof import('./src/components/general/VMultipleGroupSelect.vue')['default']
+    VMultipleSelect: typeof import('./src/components/general/VMultipleSelect.vue')['default']
+    VTextInput: typeof import('./src/components/general/VTextInput.vue')['default']
   }
 }
