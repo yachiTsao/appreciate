@@ -6,7 +6,7 @@
     persistent
     scroll-strategy="reposition"
   >
-    <v-card class="pa-5 pt-4" color="alert">
+    <v-card class="pa-5 pt-4" color="third">
       <div class="d-flex justify-end">
         <v-btn
           variant="text"
@@ -20,7 +20,7 @@
       <div>
         <div class="d-flex flex-column align-center">
           <v-icon color="error" size="56" class="mb-3">mdi-information</v-icon>
-          <p class="v-text-h3 mb-3 text-alert-title">
+          <p class="v-text-h3 mb-3 text-fourth">
             {{ $t('general.deletionDialog.title') }}
           </p>
           <p class="mb-6 v-text-body-2 text-center">
@@ -31,7 +31,7 @@
           <v-btn
             class="mr-3"
             height="34"
-            color="primary-blue"
+            color="fourth"
             variant="outlined"
             @click="handleCloseClick()"
           >

@@ -11,18 +11,16 @@
   "view": "查看",
   "edit": "编辑",
   "deleted": "删除",
-  "name": "名称",
+  "detail": "详情",
+  "month": "月份",
   "type": "类型",
   "dollar": "金额",
+  "payment": "付款",
+  "search": "搜索",
   "date": "日期",
   "loading": "加载中...",
   "noData": "无数据",
   "itemsPerPage": "每页项目数",
-  "list": "列表",
-  "detail": "详情",
-  "month": "月份",
-  "payment": "付款",
-  "search": "搜索",
   "console": "控制台",
   "createDetail": "新增详情",
   "viewDetail": "查看详情",
@@ -32,5 +30,9 @@
   "deletionDialog": {
     "title": "确认删除？",
     "context": "删除是不可逆的，\n请确认是否要继续。"
+  },
+  "select": {
+    "selectAll": "全选",
+    "cleanAll": "清除所有"
   }
 }

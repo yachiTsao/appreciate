@@ -1,7 +1,7 @@
 {
   "title": "標題",
   "home": "首頁",
-  "landingPage": "登陸頁面",
+  "landingPage": "登錄頁面",
   "functionOne": "列表",
   "functionTwo": "詳情",
   "functionThree": "概覽",
@@ -30,5 +30,9 @@
   "deletionDialog": {
     "title": "確認刪除？",
     "context": "刪除是不可逆的，\n請確認是否要繼續。"
+  },
+  "select": {
+    "selectAll": "全選",
+    "cleanAll": "清除所有"
   }
 }

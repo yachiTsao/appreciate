@@ -110,7 +110,7 @@
                 v-bind="props"
                 :ripple="false"
                 min-width="38px"
-                color="filter"
+                color="primary"
                 class="px-0 v-custom-button"
               >
                 {{ itemsPerPage }}
@@ -121,7 +121,7 @@
                 v-for="items in itemsPerPageOptions"
                 :key="items.title"
                 :value="items.value"
-                :class="{ 'bg-primary-blue': items.value === itemsPerPage }"
+                :class="{ 'bg-second': items.value === itemsPerPage }"
                 class="pa-0 v-footer__select"
                 rounded
                 @click="switchItemsPerPage(items.value)"
@@ -142,7 +142,7 @@
             density="comfortable"
             prev-icon="mdi-arrow-left"
             next-icon="mdi-arrow-right"
-            active-color="table-pagination-selected"
+            active-color="primary"
             variant="flat"
             rounded="lg"
           ></v-pagination>
@@ -253,11 +253,11 @@ td > a:not(.v-btn):hover {
   .v-table__wrapper .v-data-table__tr .v-data-table__td,
   .v-table__wrapper > table tbody > tr > td,
   .v-data-table-footer {
-    background-color: rgb(var(--v-theme-table));
+    background-color: rgb(var(--v-theme-table-record));
     color: rgb(var(--v-theme-on-table));
   }
   .v-table__wrapper > table > thead > tr > th {
-    background-color: rgb(var(--v-theme-gray-80)) !important;
+    background-color: rgb(var(--v-theme-primary)) !important;
     color: rgb(var(--v-theme-gray-20));
   }
   &.v-table.v-table--fixed-header > .v-table__wrapper > table > thead > tr > th {
@@ -267,7 +267,7 @@ td > a:not(.v-btn):hover {
     background: none;
   }
   .v-table__wrapper {
-    background: rgb(var(--v-theme-gray-80));
+    background: rgb(var(--v-theme-primary));
   }
   .v-custom-footer-select .v-field {
     background: rgb(var(--v-theme-filter));
@@ -308,7 +308,7 @@ td > a:not(.v-btn):hover {
   }
 }
 .v-custom-data-table {
-  border: 2px solid rgba(var(--v-theme-gray-80), 0.6);
+  border: 2px solid rgba(var(--v-theme-primary), 0.5);
   .v-table__wrapper.table-footer--hidden {
     border-top: 2px solid rgba(var(--v-theme-gray-80), 0.6);
     border-right: 2px solid rgba(var(--v-theme-gray-80), 0.6);

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar color="header" height="60">
+    <v-toolbar color="primary" height="60">
       <v-toolbar-title class="v-text-h3">
         <div class="d-flex align-center">
           <v-img class="mr-4" aspect-ratio="16/9" inline cover></v-img>

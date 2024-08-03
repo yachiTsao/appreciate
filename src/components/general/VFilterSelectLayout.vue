@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="px-4 py-3 mb-4" color="card" rounded>
+  <v-sheet class="px-4 py-3 mb-4" color="third" rounded>
     <v-row class="ma-0 align-center justify-space-between">
       <v-col cols="12" md="10" class="pa-0 d-flex align-center">
         <v-icon class="mr-4" icon="mdi:mdi-tune"></v-icon>
@@ -32,7 +32,7 @@
       <v-col cols="12" md="2" class="pa-0 d-flex align-center justify-end mt-sm-3 mt-md-0">
         <v-btn
           :disabled="filterForSearch.length === 0"
-          color="primary-blue"
+          color="fourth"
           density="compact"
           icon="mdi-broom"
           variant="text"
@@ -40,7 +40,7 @@
           @click="clearFilter = !clearFilter"
         >
         </v-btn>
-        <v-btn color="primary-blue" variant="outlined" class="v-text-body-2 px-2" @click="search()">
+        <v-btn color="fourth" variant="outlined" class="v-text-body-2 px-2" @click="search()">
           {{ $t('general.search') }}
         </v-btn>
       </v-col>

@@ -53,8 +53,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   width: () => 465,
   value: () => false,
-  headerColor: () => 'primary-blue',
-  bodyColor: () => 'dialog',
+  headerColor: () => 'primary',
+  bodyColor: () => 'second',
   closeIcon: () => true,
   hideActions: () => false
 })
@@ -83,6 +83,6 @@ watch(
 </script>
 <style lang="scss" scoped>
 .dialog-actions {
-  background-color: rgba(var(--v-theme-dialog));
+  background-color: rgba(var(--v-theme-second));
 }
 </style>

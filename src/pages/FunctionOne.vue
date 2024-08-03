@@ -7,7 +7,7 @@
           <v-btn
             class="mx-1 px-2"
             variant="flat"
-            color="primary-blue"
+            color="primary"
             @click="goToAction('create')"
           >
             <v-icon class="mr-1" size="20"> mdi-plus </v-icon>
@@ -118,7 +118,7 @@
           <v-btn
             height="34"
             block
-            color="primary-blue"
+            color="primary"
             variant="flat"
             :loading="loading"
             @click="

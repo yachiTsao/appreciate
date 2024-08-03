@@ -53,21 +53,21 @@ span,
 }
 // card background & sheet background
 .v-custom-background {
-  background: rgb(var(--v-theme-gray-30), 0.6) !important;
+  background: rgb(var(--v-theme-second), 0.8) !important;
 }
 // custom filter & select style
 .v-custom-filter {
   max-width: fit-content;
 }
 .v-custom-filter .v-field {
-  background: rgb(var(--v-theme-filter)) !important;
+  background: rgb(var(--v-theme-primary), 0.6) !important;
 }
 .custom-no-list-item {
   padding: 12px !important;
   min-width: auto;
   white-space: initial;
   word-wrap: break-word;
-  background-color: rgb(var(--v-theme-gray-100)) !important;
+  background-color: rgb(var(--v-theme-filter-background)) !important;
 }
 .v-multiple-select .v-input .v-field.v-field--appended,
 .v-custom-filter .v-input .v-field.v-field--appended,
@@ -82,7 +82,7 @@ span,
   max-width: 450px;
   white-space: initial;
   word-wrap: break-word;
-  background: rgb(var(--v-theme-gray-100)) !important;
+  background: rgb(var(--v-theme-filter-background)) !important;
 }
 .v-list-item.custom-list-item-auto,
 .v-list-item.custom-sub-list-item-auto {
@@ -177,7 +177,7 @@ span,
 }
 .v-application .v-field--variant-outlined,
 .v-overlay__content .v-field--variant-outlined {
-  background-color: rgb(var(--v-theme-field));
+  background-color: rgb(var(--v-theme-text-input));
   &.v-field--error {
     color: rgb(var(--v-theme-error)) !important;
   }

@@ -32,7 +32,7 @@
         </v-list-item>
       </template>
       <template v-slot:prepend-item>
-        <v-sheet color="gray-100" class="search-text-field" v-if="searchBar">
+        <v-sheet color="filter-background" class="search-text-field" v-if="searchBar">
           <v-list-item class="custom-list-item">
             <v-text-field
               v-model="search"
@@ -61,9 +61,9 @@
         </span>
       </template>
       <template v-slot:append-item>
-        <v-sheet color="gray-100" class="footer" v-if="actionFooter">
+        <v-sheet color="filter-background" class="footer" v-if="actionFooter">
           <v-divider></v-divider>
-          <div class="d-flex justify-space-between text-primary-blue">
+          <div class="d-flex justify-space-between text-filter-footer">
             <v-btn height="32" variant="text" @click.stop="selectAllItems">{{
               $t('general.select.selectAll')
             }}</v-btn>

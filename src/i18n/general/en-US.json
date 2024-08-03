@@ -30,5 +30,9 @@
   "deletionDialog": {
     "title": "Confirm deletion?",
     "context": "Deletion is irreversible, \nplease confirm if you want to proceed."
+  },
+  "select": {
+    "selectAll": "Select All",
+    "cleanAll": "Clean All"
   }
 }

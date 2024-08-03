@@ -14,7 +14,12 @@ const {
   gray60,
   gray80,
   gray90,
-  gray100
+  gray100,
+  primary,
+  second,
+  third,
+  fourth,
+  fifth
 }: ColorVariables = {
   primaryBlue: '#73BCFF',
   primaryDarkBlue: '#003A70',
@@ -30,12 +35,27 @@ const {
   gray60: '#353F49',
   gray80: '#2A333B',
   gray90: '#EDEEEE',
-  gray100: '#1E282C'
+  gray100: '#1E282C',
+  primary: '#28231C',
+  second: '#7D7D7D',
+  third: '#524D42',
+  fourth: '#DFD7D5',
+  fifth: '#716C63'
 }
 
 export const darkColors = {
   white: gray0,
   black: gray100,
+  'primary': primary,
+  'second': second,
+  'third': third,
+  'fourth': fourth,
+  'fifth': fifth,
+  'filter-background': primary,
+  'filter-footer': fourth,
+  'table-record': third,
+  'label': fifth,
+  'text-input': third,
   'primary-blue': primaryBlue,
   'on-primary-blue': gray80,
   'primary-dark-blue': primaryDarkBlue,
@@ -90,7 +110,7 @@ export const darkColors = {
   'on-tab-selected': gray0,
   filter: gray100,
   'on-filter': gray0,
-  label: gray50,
+  // label: gray50,
   'on-label': gray20,
   dropdown: gray100,
   'on-dropdown': gray0,

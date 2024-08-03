@@ -39,13 +39,13 @@ const defaultActions = [
   {
     type: 'view',
     icon: 'mdi-eye-outline',
-    color: 'primary-blue',
+    color: 'fourth',
     title: 'general.view'
   },
   {
     type: 'edit',
     icon: 'mdi-pencil-outline',
-    color: 'primary-blue',
+    color: 'fourth',
     title: 'general.edit'
   },
   {

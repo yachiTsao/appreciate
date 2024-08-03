@@ -8,8 +8,8 @@
     </div>
     <v-text-field
       v-model="text"
-      base-color="primary-blue"
-      color="primary-blue"
+      base-color="primary"
+      color="primary"
       :rules="[rules]"
       density="compact"
       :placeholder="placeholder ? $t(placeholder) : ''"
