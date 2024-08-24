@@ -13,7 +13,6 @@
           :key="item.value"
           :text="$t(item.title)"
           :value="item.value"
-          @click="router.push(item.path)"
           class="v-text-h3"
         ></v-tab>
       </v-tabs>
@@ -43,7 +42,7 @@
             <template v-slot:item="{ props }">
               <v-list-item
                 v-bind="props"
-                active-class="bg-primary-blue"
+                active-class="bg-primary"
                 rounded
               ></v-list-item>
             </template>
@@ -67,19 +66,14 @@ const route = useRoute()
 const items = [
   {
     title: "general.home",
-    value: "HOME",
-    path: '/'
+    value: "home",
+    path: '/home'
   },
   {
     title: "general.functionOne",
     value: "list",
     path: '/list'
   },
-  // {
-  //   title: "general.functionTwo",
-  //   value: "detail",
-  //   path: '/detail'
-  // },
   {
     title: "general.functionThree",
     value: "overview",
@@ -89,11 +83,7 @@ const items = [
     title: "general.functionFour",
     value: "contact",
     path: '/contact'
-  },
-  // {
-  //   title: "general.functionFive",
-  //   value: "FIVE",
-  // },
+  }
 ];
 const authStore = useAuthStore();
 const { lang: authLang, theme: authTheme } = storeToRefs(authStore);
@@ -112,9 +102,9 @@ function toggleTheme() {
   localStorage.setItem("theme", darkMode ? 'Dark' : 'Light')
 }
 function initTab() {
-  tab.value = route.path === '/' ? 'HOME' : route.path
+  tab.value = localStorage.getItem("tab") ?? 'home'
 }
-watch(
+watch(  
   lang,
   (newVal) => {
     localStorage.setItem("lang", newVal);
@@ -124,12 +114,9 @@ watch(
     immediate: true,
   }
 )
-watch(() => route.path, (newVal) => {
-  tab.value = route.path === '/' ? 'HOME' : route.path
-},
-{
-  immediate: true,
-  deep: true
+watch (tab, (newVal) => {
+  router.push(`/${newVal.toLowerCase()}`)
+  localStorage.setItem("tab", newVal.toLowerCase())
 })
 onMounted(() => {
   initTab()

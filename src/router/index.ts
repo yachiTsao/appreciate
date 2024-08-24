@@ -21,6 +21,11 @@ const router = createRouter({
       component: () => import("../pages/index.vue"),
     },
     {
+      path: "/home",
+      name: "home",
+      component: () => import("../pages/index.vue"),
+    },
+    {
       path: "/list",
       name: "list",
       component: () => import("../pages/FunctionOne.vue"),

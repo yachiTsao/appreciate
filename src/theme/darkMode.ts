@@ -19,7 +19,8 @@ const {
   second,
   third,
   fourth,
-  fifth
+  fifth,
+  sixth
 }: ColorVariables = {
   primaryBlue: '#73BCFF',
   primaryDarkBlue: '#003A70',
@@ -40,7 +41,8 @@ const {
   second: '#7D7D7D',
   third: '#524D42',
   fourth: '#DFD7D5',
-  fifth: '#716C63'
+  fifth: '#716C63',
+  sixth: '#EBE188'
 }
 
 export const darkColors = {
@@ -51,6 +53,7 @@ export const darkColors = {
   'third': third,
   'fourth': fourth,
   'fifth': fifth,
+  'sixth': sixth,
   'filter-background': primary,
   'filter-footer': fourth,
   'table-record': third,

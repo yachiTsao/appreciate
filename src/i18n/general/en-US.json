@@ -34,5 +34,6 @@
   "select": {
     "selectAll": "Select All",
     "cleanAll": "Clean All"
-  }
+  },
+  "overview": "Overview"
 }

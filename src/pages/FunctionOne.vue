@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <v-card class="fill-height pt-3 v-custom-background">
+    <v-card class="fill-height v-custom-background">
       <v-sheet width="85%" class="pa-2 mx-auto" color="transparent">
         <div class="d-flex justify-space-between pa-4">
           <p>{{ $t("general.console") }}</p>
@@ -53,6 +53,7 @@
           <VTextInput
             v-else
             :displayName="'general.date'"
+            :init-value="tempItem.date"
             class="pa-0 pb-2 v-col-12"
           />
         </v-row>
@@ -67,6 +68,7 @@
             <VTextInput
               v-else
               :displayName="'general.payment'"
+              :init-value="tempItem.payment"
               class="pa-0 pb-2 v-col-12"
             />
           </v-col>
@@ -80,6 +82,7 @@
             <VTextInput
               v-else
               :displayName="'general.dollar'"
+              :init-value="tempItem.dollar"
               class="pa-0 pb-2 v-col-12"
             />
           </v-col>
@@ -95,6 +98,7 @@
           <VTextInput
             v-else
             :displayName="'general.type'"
+            :init-value="tempItem.type"
             class="pa-0 pb-2 v-col-12"
           />
         </v-row>
@@ -109,6 +113,7 @@
           <VTextInput
             v-else
             :displayName="'general.detail'"
+            :init-value="tempItem.detail"
             class="pa-0 pb-2 v-col-12"
           />
         </v-row>
@@ -231,6 +236,7 @@ let deletionConfirmDialog = ref(false);
 function goToAction(action: string, item?: any) {
   switch (action) {
     case "create":
+      tempItem.value = {};
       dialog.value = {
         show: true,
         type: "create",
