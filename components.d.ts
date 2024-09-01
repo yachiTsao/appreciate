@@ -15,6 +15,7 @@ declare module 'vue' {
     FormatSetting: typeof import('./src/components/extensions/VDataTable/FormatSetting.vue')['default']
     FormatStatus: typeof import('./src/components/extensions/VDataTable/FormatStatus.vue')['default']
     FormatSwitch: typeof import('./src/components/extensions/VDataTable/FormatSwitch.vue')['default']
+    FormatType: typeof import('./src/components/extensions/VDataTable/FormatType.vue')['default']
     MarkdownCard: typeof import('./src/components/MarkdownCard.vue')['default']
     MarkdownPage: typeof import('./src/components/MarkdownCard.vue')['default']
     MarkdownTest: typeof import('./src/components/MarkdownTest.vue')['default']

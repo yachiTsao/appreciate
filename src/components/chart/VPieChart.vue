@@ -6,120 +6,135 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide, toRefs, onMounted, watch, computed } from 'vue'
+import { ref, provide, toRefs, onMounted, watch, computed } from "vue";
 // ECharts
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { PieChart } from 'echarts/charts'
-import { TitleComponent, LegendComponent, TooltipComponent } from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
-import { color } from '@/utils/chartColor.ts'
+import { use } from "echarts/core";
+import { CanvasRenderer } from "echarts/renderers";
+import { PieChart } from "echarts/charts";
+import {
+  TitleComponent,
+  LegendComponent,
+  TooltipComponent,
+} from "echarts/components";
+import VChart, { THEME_KEY } from "vue-echarts";
+import { color } from "@/utils/chartColor.ts";
 // import VNoChartData from '@/components/general/VNoChartData.vue'
-use([CanvasRenderer, PieChart, TitleComponent, LegendComponent, TooltipComponent])
-provide(THEME_KEY, 'light')
+use([
+  CanvasRenderer,
+  PieChart,
+  TitleComponent,
+  LegendComponent,
+  TooltipComponent,
+]);
+provide(THEME_KEY, "light");
 
 interface DataItem {
-  name: string
-  value: number
-  id?: string
-  [key: string]: any
+  name: string;
+  value: number;
+  id?: string;
+  [key: string]: any;
 }
 interface Props {
-  data: DataItem[]
-  overflow?: string
-  height?: string
-  isShowTooltip?: boolean
-  isShowLabel?: boolean
-  isEmptyTrigGray?: boolean
-  tooltipTitle?: string
-  whatKindFakeData?: 'service' | 'usageType' | 'linkedAccount'
-  legendFormatterName?: string
-  centerX?: '75%' | '80%' // 75% 是 1 row 2 charts 用, 80% 是 1 row 1 chart 用
+  data: DataItem[];
+  overflow?: string;
+  height?: string;
+  isShowTooltip?: boolean;
+  isShowLabel?: boolean;
+  isEmptyTrigGray?: boolean;
+  tooltipTitle?: string;
+  whatKindFakeData?: "service" | "usageType" | "linkedAccount";
+  legendFormatterName?: string;
+  centerX?: "75%" | "80%"; // 75% 是 1 row 2 charts 用, 80% 是 1 row 1 chart 用
+  theme?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   data: () => [],
-  height: '266px',
+  height: "266px",
   isShowTooltip: false,
   isShowLabel: false,
-  tooltipTitle: '',
+  tooltipTitle: "",
   isEmptyTrigGray: false,
-  legendFormatterName: '',
-  centerX: '75%',
-  overflow: 'none',
-})
-const data = toRefs(props).data
-const overflow = toRefs(props).overflow
-const isShowLabel = toRefs(props).isShowLabel
-const centerX = toRefs(props).centerX
+  legendFormatterName: "",
+  centerX: "75%",
+  overflow: "none",
+  theme: "darkTheme",
+});
+const data = toRefs(props).data;
+const overflow = toRefs(props).overflow;
+const isShowLabel = toRefs(props).isShowLabel;
+const centerX = toRefs(props).centerX;
 const fakeData: { [key: string]: DataItem[] } = {
   service: [
-    { name: 'EC2', value: 12 },
-    { name: 'RDS', value: 12 },
-    { name: 'CloudTrail', value: 12 },
-    { name: 'ECS', value: 12 },
-    { name: 'CloudWatch', value: 8 },
-    { name: 'DMS', value: 8 },
-    { name: 'ELB', value: 8 },
-    { name: 'S3', value: 8 },
-    { name: 'SQS', value: 8 },
-    { name: 'SMS', value: 12 }
+    { name: "EC2", value: 12 },
+    { name: "RDS", value: 12 },
+    { name: "CloudTrail", value: 12 },
+    { name: "ECS", value: 12 },
+    { name: "CloudWatch", value: 8 },
+    { name: "DMS", value: 8 },
+    { name: "ELB", value: 8 },
+    { name: "S3", value: 8 },
+    { name: "SQS", value: 8 },
+    { name: "SMS", value: 12 },
   ],
   usageType: [
-    { name: 'Fargate-vCPU-Hours:perCPU', value: 12 },
-    { name: 'RDS:GP2-Storage', value: 12 },
-    { name: 'RDS:ChargedBackupUsage', value: 12 },
-    { name: 'Multi-AZUsage:db.m5.xl', value: 12 },
-    { name: 'BoxUsage:t3.medium', value: 8 },
-    { name: 'Forgate-GB-Hours', value: 8 },
-    { name: 'LoadBalabcerUsage', value: 8 },
-    { name: 'EBS:VolumeUsage.gp2', value: 8 },
-    { name: 'NextGateway-Bytes', value: 8 },
-    { name: 'APE1-APiGatewayHttpRequest', value: 12 }
+    { name: "Fargate-vCPU-Hours:perCPU", value: 12 },
+    { name: "RDS:GP2-Storage", value: 12 },
+    { name: "RDS:ChargedBackupUsage", value: 12 },
+    { name: "Multi-AZUsage:db.m5.xl", value: 12 },
+    { name: "BoxUsage:t3.medium", value: 8 },
+    { name: "Forgate-GB-Hours", value: 8 },
+    { name: "LoadBalabcerUsage", value: 8 },
+    { name: "EBS:VolumeUsage.gp2", value: 8 },
+    { name: "NextGateway-Bytes", value: 8 },
+    { name: "APE1-APiGatewayHttpRequest", value: 12 },
   ],
   linkedAccount: [
-    { name: '6923492034823-TEST', value: 50 },
-    { name: '1203189213327-demo', value: 50 }
-  ]
-}
-const isNoDataGrayMode = ref(false)
+    { name: "6923492034823-TEST", value: 50 },
+    { name: "1203189213327-demo", value: 50 },
+  ],
+};
+const isNoDataGrayMode = ref(false);
 
 const resultData = computed(() => {
   if (props.whatKindFakeData && data.value.length === 0) {
-    return fakeData[props.whatKindFakeData]
+    return fakeData[props.whatKindFakeData];
   } else {
-    return data.value
+    return data.value;
   }
-})
-
+});
 watch(data, (newVal) => {
-  if (props.legendFormatterName !== '') {
+  if (props.legendFormatterName !== "") {
     option.value.legend.formatter = function (dataName: string) {
       // dataName 應該是給 id, 因為一開始會用 id 當 name
-      const sereisDataItem = newVal.find((item: { name: string }) => item.name === dataName)
+      const sereisDataItem = newVal.find(
+        (item: { name: string }) => item.name === dataName,
+      );
       if (sereisDataItem && sereisDataItem[props.legendFormatterName]) {
-        const idToName = sereisDataItem[props.legendFormatterName]
-        return idToName
+        const idToName = sereisDataItem[props.legendFormatterName];
+        return idToName;
       } else {
-        return props.legendFormatterName
+        return props.legendFormatterName;
       }
-    }
+    };
   }
 
   if (props.isEmptyTrigGray && data.value.length === 0) {
-    option.value.legend.formatter = null
-    isNoDataGrayMode.value = true
+    option.value.legend.formatter = null;
+    isNoDataGrayMode.value = true;
   } else {
-    isNoDataGrayMode.value = false
+    isNoDataGrayMode.value = false;
   }
-})
+});
 const option = ref({
   color: color,
   tooltip: {
     show: props.isShowTooltip,
-    trigger: 'item',
+    trigger: "item",
     formatter: function (params: any) {
-      const paramsNameKey = props.legendFormatterName ? props.legendFormatterName : 'name'
-      let result = `<span style="font-size: 12px; font-weight: bold;"> ${props.tooltipTitle}</span><br>`
+      const paramsNameKey = props.legendFormatterName
+        ? props.legendFormatterName
+        : "name";
+      let result = `<span style="font-size: 12px; font-weight: bold;"> ${props.tooltipTitle}</span><br>`;
       result += `<div style="
           display: flex;
           justify-content: space-between;
@@ -127,40 +142,40 @@ const option = ref({
           width: 243px;
           font-size: 12px;
         "><div> ${params.marker} ${params.data[paramsNameKey]} </div> <div class="pl-2"> $${Number(
-          params.value
+          params.value,
         )
           .toFixed(2)
-          .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}<span class="pl-1">(${
+          .replace(/(\d)(?=(\d{3})+\.)/g, "$1,")}<span class="pl-1">(${
           params.percent
-        }%)</span></div></div>`
-      return result
+        }%)</span></div></div>`;
+      return result;
     },
     textStyle: {
-      color: '#556675',
-      fontFamily: 'Noto Sans TC',
-      fontSize: 12
-    }
+      color: "#556675",
+      fontFamily: "Noto Sans TC",
+      fontSize: 12,
+    },
   },
   legend: {
-    orient: 'vertical',
-    top: '8%',
-    left: 'left',
+    orient: "vertical",
+    top: "8%",
+    left: "left",
     itemWidth: 10, // 图例项的宽度
     itemHeight: 6, // 图例项的高度
     textStyle: {
-      color: '#DFD7D5',
-      fontFamily: 'Noto Sans TC',
+      color: "#DFD7D5",
+      fontFamily: "Noto Sans TC",
       fontSize: 12,
       width: 230,
-      overflow: overflow.value
-    }
+      overflow: overflow.value,
+    },
   },
   series: [
     {
-      name: 'Access From',
-      type: 'pie',
-      radius: ['40%', '70%'],
-      center: [props.centerX, '50%'],
+      name: "Access From",
+      type: "pie",
+      radius: ["40%", "70%"],
+      center: [props.centerX, "50%"],
       avoidLabelOverlap: false,
       padAngle: 2,
       itemStyle: {
@@ -168,32 +183,40 @@ const option = ref({
       },
       label: {
         show: props.isShowLabel,
-        color: '#A9B6C3',
-        formatter: '{d}%' // 格式化标签为百分比
+        color: "#A9B6C3",
+        formatter: "{d}%", // 格式化标签为百分比
       },
       labelLine: {
         show: false,
         length: 8, // 第一段线的长度
-        length2: 5 // 第二段线的长度
+        length2: 5, // 第二段线的长度
       },
       emphasis: {
         disabled: !props.isShowTooltip,
         scale: false,
-        focus: 'self'
+        focus: "self",
       },
-      data: resultData
-    }
-  ]
-})
+      data: resultData,
+    },
+  ],
+});
 watch(overflow, (newVal) => {
-  option.value.legend.textStyle.overflow = newVal
-})
+  option.value.legend.textStyle.overflow = newVal;
+});
 watch(isShowLabel, (newVal) => {
-  option.value.series[0].label.show = newVal
-})
+  option.value.series[0].label.show = newVal;
+});
 watch(centerX, (newVal) => {
-  option.value.series[0].center = [newVal, '50%']
-})
+  option.value.series[0].center = [newVal, "50%"];
+});
+watch(
+  () => props.theme,
+  (newVal) => {
+    option.value.legend.textStyle.color =
+      newVal === "darkTheme" ? "#DFD7D5" : "#556675";
+  },
+  { immediate: true },
+);
 </script>
 
 <style lang="scss" scoped>

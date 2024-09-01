@@ -19,6 +19,7 @@
                   :data="pieData"
                   :isShowTooltip="true"
                   :tooltipTitle="tooltipTitle"
+                  :theme="chartTheme"
                   :height="'300px'"
                 />
               </v-layout>
@@ -56,6 +57,7 @@
                       :total="'Budget:'"
                       :height="'263px'"
                       :width="'270px'"
+                      :theme="chartTheme"
                     />
                   </v-layout>
                 </v-col>
@@ -67,21 +69,20 @@
           <v-sheet color="third" class="pa-4 ma-3" width="100%">
             <div class="d-flex align-center">
               <p class="v-text-h3 pr-2">Monthly Growth</p>
-              <v-sheet color="primary" class="pa-2" width="fit-content" height="fit-content"
-                >type of dinner</v-sheet>
+              <v-sheet
+                color="primary"
+                class="pa-2"
+                width="fit-content"
+                height="fit-content"
+                >type of dinner</v-sheet
+              >
             </div>
-            <!-- <span class="v-text-h3">Monthly Growth</span>
-            <v-sheet
-              color="primary"
-              class="pa-2"
-              width="fit-content"
-              height="fit-content"
-              >type of dinner</v-sheet> -->
             <v-layout>
               <VBarChart
                 :chartData="barData"
                 :period="['202401', '202402', '202403']"
                 :height="'300px'"
+                :theme="chartTheme"
               />
             </v-layout>
           </v-sheet>
@@ -94,6 +95,7 @@
                 :chartData="lineData"
                 :period="['202401', '202402', '202403']"
                 :height="'300px'"
+                :theme="chartTheme"
               />
             </v-layout>
           </v-sheet>
@@ -108,7 +110,11 @@ import VPieChart from "@/components/chart/VPieChart.vue";
 import VGaugeChart from "@/components/chart/VGaugeChart.vue";
 import VBarChart from "@/components/chart/VBarChart.vue";
 import VLineChart from "@/components/chart/VLineChart.vue";
+import { useTheme } from "vuetify";
 
+let theme = useTheme();
+let systemTheme = ref(theme);
+let chartTheme = ref("darkTheme");
 let pieData = [
   { name: "A", value: 335 },
   { name: "B", value: 315 },
@@ -138,34 +144,34 @@ let gaugeData = ref([
 let barData = ref([12, 34, 43]);
 let lineData = ref([
   {
-    name: "A",
+    name: "need",
     type: "line",
     symbol: "none",
     data: [
-      ["202401", 23],
-      ["202402", 31],
+      ["202401", 34],
+      ["202402", 79],
       ["202403", 45],
     ],
   },
   {
-    name: "B",
+    name: "must",
     type: "line",
     symbol: "none",
     data: [
-      ["202401", 23],
-      ["202402", 42],
-      ["202403", 59],
-    ],
-  },
-  {
-    name: "C",
-    type: "line",
-    symbol: "none",
-    data: [
-      ["202401", 55],
-      ["202402", 76],
-      ["202403", 47],
+      ["202401", 93],
+      ["202402", 95],
+      ["202403", 19],
     ],
   },
 ]);
+watch(
+  systemTheme,
+  (val) => {
+    chartTheme.value = val.global.name;
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+);
 </script>

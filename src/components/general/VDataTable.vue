@@ -79,6 +79,8 @@
       <FormatSetting v-else-if="header.formatSetting" :item="item?.[header.key]" />
       <!-- 套用 FormatPrice -->
       <FormatPrice v-else-if="header.formatPrice" :item="item" />
+      <!-- 套用 FormatType -->
+      <FormatType v-else-if="header.formatType" :item="item?.[header.key]" />
       <!-- 套用 FormatActions -->
       <div
         v-else-if="header.key === 'actions'"
@@ -170,6 +172,7 @@ import FormatActions from '@/components/extensions/VDataTable/FormatActions.vue'
 import FormatSetting from '@/components/extensions/VDataTable/FormatSetting.vue'
 import FormatSwitch from '@/components/extensions/VDataTable/FormatSwitch.vue'
 import FormatPrice from '@/components/extensions/VDataTable/FormatPrice.vue'
+import FormatType from '@/components/extensions/VDataTable/FormatType.vue'
 interface SortByType {
   key: string
   order?: boolean | 'asc' | 'desc'

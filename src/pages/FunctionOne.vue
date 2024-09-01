@@ -91,14 +91,14 @@
           <VLabel
             v-if="dialog.type === 'view'"
             class="pa-0 pb-2 v-col-12"
-            :title="'general.type'"
+            :title="'general.category'"
             suffix=""
-            :text="tempItem.type"
+            :text="tempItem.category"
           />
           <VTextInput
             v-else
-            :displayName="'general.type'"
-            :init-value="tempItem.type"
+            :displayName="'general.category'"
+            :init-value="tempItem.category"
             class="pa-0 pb-2 v-col-12"
           />
         </v-row>
@@ -116,6 +116,22 @@
             :init-value="tempItem.detail"
             class="pa-0 pb-2 v-col-12"
           />
+        </v-row>
+        <v-row class="ma-0">
+          <VLabel
+            v-if="dialog.type === 'view'"
+            class="pa-0 pb-2 v-col-12"
+            :title="'general.type'"
+            suffix=""
+            :text="tempItem.type"
+          />
+          <div v-else>
+            <p class="v-text-body-2">{{ $t("general.type") }}</p>
+            <v-radio-group v-model="result" inline hide-details class="d-flex justify-center">
+              <v-radio label="Need" value="NEED" class="pr-2" color="sixth"></v-radio>
+              <v-radio label="Must" value="MUST" color="primary-orange"></v-radio>
+            </v-radio-group>
+          </div>
         </v-row>
       </template>
       <template #actions>
@@ -181,8 +197,9 @@ const headers = ref([
   { title: "general.date", align: "start", key: "date" },
   { title: "general.payment", align: "start", key: "payment" },
   { title: "general.dollar", align: "start", key: "dollar" },
-  { title: "general.type", align: "start", key: "type" },
+  { title: "general.category", align: "start", key: "category" },
   { title: "general.detail", align: "start", key: "detail" },
+  { title: "general.type", align: "start", key: "type", formatType: true },
   { title: "", align: "end", key: "actions", sortable: false },
 ]);
 const items = ref([
@@ -191,40 +208,45 @@ const items = ref([
     date: "2024/07/18",
     payment: "credit card",
     detail: "Pizza",
-    type: "dinner",
+    category: "dinner",
     dollar: 50,
+    type: "need",
   },
   {
     id: "000002",
     date: "2024/07/19",
     payment: "cash",
     detail: "滷肉飯",
-    type: "dinner",
+    category: "dinner",
     dollar: 50,
+    type: "must",
   },
   {
     id: "000003",
     date: "2024/07/20",
     payment: "cash",
     detail: "牛肉麵",
-    type: "lunch",
+    category: "lunch",
     dollar: 100,
+    type: "must",
   },
   {
     id: "000004",
     date: "2024/07/21",
     payment: "credit card",
     detail: "麻辣火鍋",
-    type: "dinner",
+    category: "dinner",
     dollar: 200,
+    type: "need",
   },
   {
     id: "000005",
     date: "2024/07/22",
     payment: "cash",
     detail: "炒飯",
-    type: "lunch",
+    category: "lunch",
     dollar: 80,
+    type: "must",
   },
 ]);
 let tempItem = ref({});
@@ -233,6 +255,7 @@ let dialog = ref({
   type: "view",
 });
 let deletionConfirmDialog = ref(false);
+let result = ref("radio-1");
 function goToAction(action: string, item?: any) {
   switch (action) {
     case "create":
