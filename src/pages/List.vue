@@ -126,7 +126,7 @@
             :text="tempItem.type"
           />
           <div v-else>
-            <p class="v-text-body-2">{{ $t("general.type") }}</p>
+            <p class="v-text-body-2 text-fourth">{{ $t("general.type") }}</p>
             <v-radio-group
               v-model="result"
               inline

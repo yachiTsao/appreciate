@@ -5,7 +5,7 @@
       class="mb-2 d-flex align-center justify-space-between"
       :class="fontSize ? fontSize : 'v-text-body-2'"
     >
-      <p>{{ prefix }} {{ $t(title) }} {{ suffix }}</p>
+      <p :class="titleColor">{{ prefix }} {{ $t(title) }} {{ suffix }}</p>
       <slot name="suffix"></slot>
     </div>
     <v-sheet
@@ -40,6 +40,7 @@ interface Props {
   color?: string
   height?: string | number
   fontSize?: string | number
+  titleColor?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   title: () => '',
@@ -48,6 +49,7 @@ const props = withDefaults(defineProps<Props>(), {
   text: () => '',
   color: () => 'label',
   height: () => 36,
-  fontSize: () => 'v-text-body-2'
+  fontSize: () => 'v-text-body-2',
+  titleColor: () => 'text-fourth'
 })
 </script>

@@ -41,9 +41,13 @@
   "contactUs": "Contact Us",
   "contactForm": {
     "name": "Name",
+    "namePlaceholder": "Please enter your name",
     "email": "Email",
+    "emailPlaceholder": "Please enter your email",
     "phone": "Phone Number (Optional)",
+    "phonePlaceholder": "Please enter your phone number",
     "message": "Message",
+    "messagePlaceholder": "Please enter your message",
     "submit": "Submit"
   }
 }

@@ -2,7 +2,7 @@
   <div>
     <div class="mb-2 d-flex align-center">
       <slot name="prefix"></slot>
-      <p class="v-text-body-1" v-if="displayName">{{ $t(displayName) }}</p>
+      <p class="v-text-body-1" v-if="displayName" :class="displayColor">{{ $t(displayName) }}</p>
       <slot name="suffix"></slot>
       <slot name="append"></slot>
     </div>
@@ -34,12 +34,14 @@ interface Props {
   rules?: string | boolean | Function
   error?: boolean
   hideDetails?: boolean | string
+  displayColor?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   initValue: () => '',
   rules: true,
   error: false,
-  hideDetails: 'auto'
+  hideDetails: 'auto',
+  displayColor: 'text-fourth'
 })
 const emit = defineEmits<{
   (e: 'change', text: string): void
