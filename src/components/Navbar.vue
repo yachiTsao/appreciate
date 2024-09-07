@@ -70,17 +70,17 @@ const items = [
     path: '/home'
   },
   {
-    title: "general.functionOne",
+    title: "general.listTitle",
     value: "list",
     path: '/list'
   },
   {
-    title: "general.functionThree",
+    title: "general.overviewTitle",
     value: "overview",
     path: '/overview'
   },
   {
-    title: "general.functionFour",
+    title: "general.contactTitle",
     value: "contact",
     path: '/contact'
   }

@@ -1,11 +1,11 @@
 {
   "title": "Title",
   "home": "HOME",
-  "landingPage": "landing page",
-  "functionOne": "LIST",
+  "landingPage": "Landing Page",
+  "listTitle": "LIST",
   "functionTwo": "Detail",
-  "functionThree": "OVERVIEW",
-  "functionFour": "CONTACT",
+  "overviewTitle": "OVERVIEW",
+  "contactTitle": "CONTACT",
   "functionFive": "function five",
   "create": "Create",
   "view": "View",
@@ -19,7 +19,7 @@
   "payment": "Payment",
   "search": "Search",
   "date": "Date",
-  "loading":  "loading...",
+  "loading": "loading...",
   "noData": "No data",
   "itemsPerPage": "Items per page",
   "console": "Console",
@@ -36,5 +36,14 @@
     "selectAll": "Select All",
     "cleanAll": "Clean All"
   },
-  "overview": "Overview"
+  "list": "List",
+  "overview": "Overview",
+  "contactUs": "Contact Us",
+  "contactForm": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone Number (Optional)",
+    "message": "Message",
+    "submit": "Submit"
+  }
 }

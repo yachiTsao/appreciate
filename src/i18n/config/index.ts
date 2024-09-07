@@ -1,3 +1,3 @@
 // import { Locales } from './locales'
-const browserLang: string = navigator.language
-export const defaultLocale = browserLang
+const browserLang: string = navigator.language;
+export const defaultLocale = browserLang;

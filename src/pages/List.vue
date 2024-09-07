@@ -3,7 +3,7 @@
     <v-card class="fill-height v-custom-background">
       <v-sheet width="85%" class="pa-2 mx-auto" color="transparent">
         <div class="d-flex justify-space-between pa-4">
-          <p>{{ $t("general.console") }}</p>
+          <p>{{ $t("general.list") }}</p>
           <v-btn
             class="mx-1 px-2"
             variant="flat"
@@ -127,9 +127,23 @@
           />
           <div v-else>
             <p class="v-text-body-2">{{ $t("general.type") }}</p>
-            <v-radio-group v-model="result" inline hide-details class="d-flex justify-center">
-              <v-radio label="Need" value="NEED" class="pr-2" color="sixth"></v-radio>
-              <v-radio label="Must" value="MUST" color="primary-orange"></v-radio>
+            <v-radio-group
+              v-model="result"
+              inline
+              hide-details
+              class="d-flex justify-center"
+            >
+              <v-radio
+                label="Need"
+                value="NEED"
+                class="pr-2"
+                color="sixth"
+              ></v-radio>
+              <v-radio
+                label="Must"
+                value="MUST"
+                color="primary-orange"
+              ></v-radio>
             </v-radio-group>
           </div>
         </v-row>

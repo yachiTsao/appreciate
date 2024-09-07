@@ -1,3 +1,1 @@
-export const modules = [
-  'general'
-]
+export const modules = ["general"];

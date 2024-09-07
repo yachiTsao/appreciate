@@ -18,17 +18,17 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("../pages/index.vue"),
+      component: () => import("../pages/Home.vue"),
     },
     {
       path: "/home",
       name: "home",
-      component: () => import("../pages/index.vue"),
+      component: () => import("../pages/Home.vue"),
     },
     {
       path: "/list",
       name: "list",
-      component: () => import("../pages/FunctionOne.vue"),
+      component: () => import("../pages/List.vue"),
     },
     // {
     //   path: "/detail",
@@ -38,12 +38,12 @@ const router = createRouter({
     {
       path: "/overview",
       name: "overview",
-      component: () => import("../pages/FunctionThree.vue"),
+      component: () => import("../pages/Overview.vue"),
     },
     {
       path: "/contact",
       name: "contact",
-      component: () => import("../pages/FunctionFour.vue"),
+      component: () => import("../pages/Contact.vue"),
     },
     // {
     //   path: "/function/five",

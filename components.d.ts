@@ -24,6 +24,8 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SideMenu: typeof import('./src/components/SideMenu.vue')['default']
     VBarChart: typeof import('./src/components/chart/VBarChart.vue')['default']
+    VCustomCard: typeof import('./src/components/general/VCustomCard.vue')['default']
+    VCustomLayout: typeof import('./src/components/general/VCustomLayout.vue')['default']
     VDataTable: typeof import('./src/components/general/VDataTable.vue')['default']
     VDeletionAlert: typeof import('./src/components/general/VDeletionAlert.vue')['default']
     VDialogLayout: typeof import('./src/components/general/VDialogLayout.vue')['default']
