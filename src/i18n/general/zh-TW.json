@@ -34,6 +34,36 @@
   },
   "select": {
     "selectAll": "全選",
-    "cleanAll": "清除所有"
+    "cleanAll": "清除全部"
+  },
+  "periodSelect": {
+    "from": "從",
+    "to": "到",
+    "lastSevenDays": "過去 7 天",
+    "lastFourteenDays": "過去 14 天",
+    "lastYear": "去年",
+    "previousOneMonth": "過去 1 個月",
+    "previousThreeMonths": "過去 3 個月",
+    "previousSixMonths": "過去 6 個月",
+    "monthToDate": "本月至今",
+    "quarterToDate": "本季度至今",
+    "yearToDate": "本年至今",
+    "custom": "自定義",
+    "cancel": "取消",
+    "apply": "套用"
+  },
+  "list": "列表",
+  "overview": "概覽",
+  "contactUs": "聯繫我們",
+  "contactForm": {
+    "name": "姓名",
+    "namePlaceholder": "請輸入您的姓名",
+    "email": "電子郵件",
+    "emailPlaceholder": "請輸入您的電子郵件",
+    "phone": "電話號碼（可選）",
+    "phonePlaceholder": "請輸入您的電話號碼",
+    "message": "信息",
+    "messagePlaceholder": "請輸入您的信息",
+    "submit": "提交"
   }
 }

@@ -133,5 +133,8 @@ export const darkColors = {
   mdmodalinput: gray100,
   stepper: gray80,
   'on-stepper': primaryBlue,
-  'on-date-picker': gray0
+  datepicker: primary,
+  'on-datepicker': gray0,
+  dateheader: fourth,
+  'on-dateheader': gray100
 }

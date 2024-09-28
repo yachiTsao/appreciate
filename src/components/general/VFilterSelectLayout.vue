@@ -14,6 +14,7 @@
             :item-value="'value'"
             :init-value="initFilterList[key]"
             :clear="clearFilter"
+            :filter-date="filterDate[key]"
             @change="(val) => (selectedFilterList[key] = val)"
           />
           <VFilterGroupSelect
@@ -71,11 +72,13 @@ interface Props {
   initFilterList: Record<string, (string | FilterItem[] | Group[])[]>
   displayName?: Record<string, string> // { <key in filterList>: <display name> }
   group?: string[] // record filterList key which filter type is group
+  filterDate?: Record<string, boolean>
 }
 const props = withDefaults(defineProps<Props>(), {
   filterList: () => ({}),
   initFilterList: () => ({}),
-  group: () => []
+  group: () => [],
+  filterDate: () => ({}),
 })
 const emit = defineEmits<{
   (e: 'change', value: any): void

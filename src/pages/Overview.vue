@@ -5,13 +5,16 @@
         <div class="d-flex justify-space-between pa-4">
           <p>{{ $t("general.overview") }}</p>
         </div>
-        <!-- <VFilterSelectLayout
+        <VFilterSelectLayout
           :display-name="filterDisplayName"
           :filter-list="filterList"
           :init-filter-list="initFilterList"
-        /> -->
+          :filter-date="filterDate"
+          @change="(v) => (filterForSearch = v)"
+          @search="search()"
+        />
         <v-row class="ma-0">
-          <v-col>
+          <v-col class="ps-0">
             <v-sheet color="third" class="pa-4">
               <p class="v-text-h3">Monthly Total Cost</p>
               <v-layout>
@@ -25,7 +28,7 @@
               </v-layout>
             </v-sheet>
           </v-col>
-          <v-col>
+          <v-col class="pe-0">
             <v-sheet color="third" class="pa-4">
               <p class="v-text-h3">Cost & Budget</p>
               <v-row>
@@ -66,14 +69,15 @@
           </v-col>
         </v-row>
         <v-row class="ma-0">
-          <v-sheet color="third" class="pa-4 ma-3" width="100%">
+          <v-sheet color="third" class="pa-4 my-3" width="100%">
             <div class="d-flex align-center">
               <p class="v-text-h3 pr-2">Monthly Growth</p>
               <v-sheet
                 color="primary"
-                class="pa-2"
+                class="pa-2 v-text-body-2"
                 width="fit-content"
                 height="fit-content"
+                rounded="xl"
                 >type of dinner</v-sheet
               >
             </div>
@@ -88,7 +92,7 @@
           </v-sheet>
         </v-row>
         <v-row class="ma-0">
-          <v-sheet color="third" class="pa-4 ma-3" width="100%">
+          <v-sheet color="third" class="pa-4 my-3" width="100%">
             <p class="v-text-h3">Need & Must</p>
             <v-layout>
               <VLineChart
@@ -111,10 +115,95 @@ import VGaugeChart from "@/components/chart/VGaugeChart.vue";
 import VBarChart from "@/components/chart/VBarChart.vue";
 import VLineChart from "@/components/chart/VLineChart.vue";
 import { useTheme } from "vuetify";
-
+import { IInitFilterList } from "@/types";
+interface FilterItem {
+  key: string;
+  value: string;
+}
 let theme = useTheme();
 let systemTheme = ref(theme);
 let chartTheme = ref("darkTheme");
+const today = new Date();
+const filterList = ref<Record<string, (string | FilterItem[])[]>>({
+  month: [],
+  type: [],
+});
+const filterDisplayName = {
+  month: "general.month",
+  type: "general.type",
+};
+const initFilterList = ref<IInitFilterList>({
+  month: previousMonth(today, 6) || [""],
+  type: [],
+});
+const filterDate = ref({
+  month: {
+    isUse: true,
+    type: "monthMode",
+    max: today,
+    clearValue: previousMonth(today, 1),
+    presetValue: [
+      {
+        text: "general.periodSelect.lastYear",
+        value: "lastYear",
+        month: [
+          { month: today.getMonth(), year: today.getFullYear() - 1 },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.previousSixMonths",
+        value: "last6Months",
+        month: previousMonth(today, 6),
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.previousThreeMonths",
+        value: "last3Months",
+        month: previousMonth(today, 3),
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.previousOneMonth",
+        value: "lastMonth",
+        month: previousMonth(today, 1),
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.monthToDate",
+        value: "monthToDate",
+        month: [
+          { month: today.getMonth(), year: today.getFullYear() },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled: false,
+      },
+      {
+          text: 'general.periodSelect.quarterToDate',
+          value: 'quarterToDate',
+          month: [
+            { month: startMonthForQuarterToDate(today), year: today.getFullYear() },
+            { month: today.getMonth(), year: today.getFullYear() }
+          ],
+          disabled:
+            [0, 3, 6, 9].includes(today.getMonth())
+              ? true
+              : false
+        },
+        {
+          text: 'general.periodSelect.yearToDate',
+          value: 'yearToDate',
+          month: [
+            { month: 0, year: today.getFullYear() },
+            { month: today.getMonth(), year: today.getFullYear() }
+          ],
+          disabled: today.getMonth() === 0 || today.getMonth() === 0 ? true : false
+        },
+    ],
+  },
+  type: { isUse: false },
+});
 let pieData = [
   { name: "A", value: 335 },
   { name: "B", value: 315 },
@@ -164,6 +253,29 @@ let lineData = ref([
     ],
   },
 ]);
+function startMonthForQuarterToDate(date: any) {
+  const month = date.getMonth()
+  let startMonth = 0
+  if (month < 3) {
+    startMonth = 0 // 一月
+  } else if (month < 6) {
+    startMonth = 3 // 四月
+  } else if (month < 9) {
+    startMonth = 6 // 七月
+  } else {
+    startMonth = 9 // 十月
+  }
+  return startMonth
+}
+function previousMonth(currentDate: any, previous: number) {
+  let firstDay = new Date();
+  firstDay.setDate(1);
+  firstDay.setMonth(firstDay.getMonth() - previous);
+  return [
+    { month: firstDay.getMonth(), year: firstDay.getFullYear() },
+    { month: currentDate.getMonth(), year: currentDate.getFullYear() },
+  ];
+}
 watch(
   systemTheme,
   (val) => {

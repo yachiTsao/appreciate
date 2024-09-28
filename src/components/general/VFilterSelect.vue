@@ -1,7 +1,18 @@
 <template>
   <div class="d-flex align-center">
     <span class="mr-2 v-text-body-2" v-if="displayName">{{ $t(displayName) }}</span>
+    <VDateSelect
+      v-if="filterDate.isUse"
+      :type="filterDate.type"
+      :init-value="initValue"
+      :max="filterDate.max"
+      :preset-value="filterDate.presetValue"
+      :clear="clear"
+      :clear-value="filterDate.clearValue"
+      @change="(val) => (selectedDate = val)"
+    />
     <v-select
+      v-if="!filterDate.isUse"
       v-model="selectedItems"
       :items="filteredItems"
       :item-title="itemTitle"
@@ -85,6 +96,8 @@ try {
   console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
 }
 import { ref, computed, watch, onMounted, toRefs } from 'vue'
+import VDateSelect from './VDateSelect.vue'
+import type { IFilterForPeriodItem } from '@/types'
 interface FilterItem {
   key: string
   value: string
@@ -98,13 +111,15 @@ interface Props {
   actionFooter?: boolean // If show action footer
   searchBar?: boolean // If show search footer
   clear: boolean
+  filterDate: IFilterForPeriodItem
 }
 const props = withDefaults(defineProps<Props>(), {
   displayName: () => '',
   items: () => [],
   initValue: () => [],
   actionFooter: true,
-  searchBar: true
+  searchBar: true,
+  filterDate: () => ({ isUse: false, type: 'dayMode' }),
 })
 const emit = defineEmits<{
   (e: 'change', initList: string[]): void
@@ -113,6 +128,7 @@ const search = ref('')
 const initValue = toRefs(props).initValue
 // const selectedItems = ref<any[]>([])
 const selectedItems = ref<any>('')
+const selectedDate = ref<any>('')
 const clearable = computed(() => props.clear)
 const selectAll = computed(() => selectedItems.value.length === props.items.length)
 const selectSome = computed(() => selectedItems.value.length > 0)
@@ -166,6 +182,9 @@ watch(selectedItems, (newVal, oldVal) => {
   if (newVal !== oldVal) {
     emit('change', selectedItems.value)
   }
+})
+watch(selectedDate, () => {
+  emit('change', selectedDate.value)
 })
 watch(
   initValue,

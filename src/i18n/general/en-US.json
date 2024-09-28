@@ -36,6 +36,22 @@
     "selectAll": "Select All",
     "cleanAll": "Clean All"
   },
+  "periodSelect": {
+    "from": "From",
+    "to": "To",
+    "lastSevenDays": "Last 7 days",
+    "lastFourteenDays": "Last 14 days",
+    "lastYear": "Last Year",
+    "previousOneMonth": "Previous 1 month",
+    "previousThreeMonths": "Previous 3 months",
+    "previousSixMonths": "Previous 6 months",
+    "monthToDate": "Month to Date",
+    "quarterToDate": "Quarter to Date",
+    "yearToDate": "Year to Date",
+    "custom": "Custom",
+    "cancel": "Cancel",
+    "apply": "Apply"
+  },
   "list": "List",
   "overview": "Overview",
   "contactUs": "Contact Us",

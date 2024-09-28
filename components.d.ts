@@ -27,6 +27,7 @@ declare module 'vue' {
     VCustomCard: typeof import('./src/components/general/VCustomCard.vue')['default']
     VCustomLayout: typeof import('./src/components/general/VCustomLayout.vue')['default']
     VDataTable: typeof import('./src/components/general/VDataTable.vue')['default']
+    VDateSelect: typeof import('./src/components/general/VDateSelect.vue')['default']
     VDeletionAlert: typeof import('./src/components/general/VDeletionAlert.vue')['default']
     VDialogLayout: typeof import('./src/components/general/VDialogLayout.vue')['default']
     VFilterGroupSelect: typeof import('./src/components/general/VFilterGroupSelect.vue')['default']

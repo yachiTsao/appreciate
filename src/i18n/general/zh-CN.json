@@ -7,7 +7,7 @@
   "overviewTitle": "概览",
   "contactTitle": "联系我们",
   "functionFive": "功能五",
-  "create": "新增",
+  "create": "创建",
   "view": "查看",
   "edit": "编辑",
   "deleted": "删除",
@@ -23,7 +23,7 @@
   "noData": "无数据",
   "itemsPerPage": "每页项目数",
   "console": "控制台",
-  "createDetail": "新增详情",
+  "createDetail": "创建详情",
   "viewDetail": "查看详情",
   "editDetail": "编辑详情",
   "cancel": "取消",
@@ -34,6 +34,36 @@
   },
   "select": {
     "selectAll": "全选",
-    "cleanAll": "清除所有"
+    "cleanAll": "清除全部"
+  },
+  "periodSelect": {
+    "from": "从",
+    "to": "到",
+    "lastSevenDays": "过去 7 天",
+    "lastFourteenDays": "过去 14 天",
+    "lastYear": "去年",
+    "previousOneMonth": "过去 1 个月",
+    "previousThreeMonths": "过去 3 个月",
+    "previousSixMonths": "过去 6 个月",
+    "monthToDate": "本月至今",
+    "quarterToDate": "本季度至今",
+    "yearToDate": "本年至今",
+    "custom": "自定义",
+    "cancel": "取消",
+    "apply": "应用"
+  },
+  "list": "列表",
+  "overview": "概览",
+  "contactUs": "联系我们",
+  "contactForm": {
+    "name": "姓名",
+    "namePlaceholder": "请输入您的姓名",
+    "email": "电子邮件",
+    "emailPlaceholder": "请输入您的电子邮件",
+    "phone": "电话号码（可选）",
+    "phonePlaceholder": "请输入您的电话号码",
+    "message": "信息",
+    "messagePlaceholder": "请输入您的信息",
+    "submit": "提交"
   }
 }

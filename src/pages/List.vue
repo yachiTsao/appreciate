@@ -18,6 +18,9 @@
           :display-name="filterDisplayName"
           :filter-list="filterList"
           :init-filter-list="initFilterList"
+          :filter-date="filterDate"
+          @change="(v) => (filterForSearch = v)"
+          @search="search()"
         />
         <VDataTable
           :headers="headers"
@@ -191,11 +194,13 @@ import VDeletionAlert from "@/components/general/VDeletionAlert.vue";
 import VFilterSelectLayout from "@/components/general/VFilterSelectLayout.vue";
 import VLabel from "@/components/general/VLabel.vue";
 import VTextInput from "@/components/general/VTextInput.vue";
+import { IInitFilterList } from "@/types";
 interface FilterItem {
   key: string;
   value: string;
 }
 let loading = ref(true);
+const today = new Date();
 const filterList = ref<Record<string, (string | FilterItem[])[]>>({
   month: [],
   type: [],
@@ -204,9 +209,79 @@ const filterDisplayName = {
   month: "general.month",
   type: "general.type",
 };
-const initFilterList = ref<Record<string, (string | FilterItem[])[]>>({
-  ...filterList.value,
+const initFilterList = ref<IInitFilterList>({
+  month: previousMonth(today, 6) || [""],
+  type: [],
 });
+const filterDate = ref({
+  month: {
+    isUse: true,
+    type: "monthMode",
+    max: today,
+    clearValue: previousMonth(today, 1),
+    presetValue: [
+      {
+        text: "general.periodSelect.lastYear",
+        value: "lastYear",
+        month: [
+          { month: today.getMonth(), year: today.getFullYear() - 1 },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.previousSixMonths",
+        value: "last6Months",
+        month: previousMonth(today, 6),
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.previousThreeMonths",
+        value: "last3Months",
+        month: previousMonth(today, 3),
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.previousOneMonth",
+        value: "lastMonth",
+        month: previousMonth(today, 1),
+        disabled: false,
+      },
+      {
+        text: "general.periodSelect.monthToDate",
+        value: "monthToDate",
+        month: [
+          { month: today.getMonth(), year: today.getFullYear() },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled: false,
+      },
+      {
+          text: 'general.periodSelect.quarterToDate',
+          value: 'quarterToDate',
+          month: [
+            { month: startMonthForQuarterToDate(today), year: today.getFullYear() },
+            { month: today.getMonth(), year: today.getFullYear() }
+          ],
+          disabled:
+            [0, 3, 6, 9].includes(today.getMonth())
+              ? true
+              : false
+        },
+        {
+          text: 'general.periodSelect.yearToDate',
+          value: 'yearToDate',
+          month: [
+            { month: 0, year: today.getFullYear() },
+            { month: today.getMonth(), year: today.getFullYear() }
+          ],
+          disabled: today.getMonth() === 0 || today.getMonth() === 0 ? true : false
+        },
+    ],
+  },
+  type: { isUse: false },
+});
+const filterForSearch = ref([])
 const headers = ref([
   { title: "general.date", align: "start", key: "date" },
   { title: "general.payment", align: "start", key: "payment" },
@@ -270,6 +345,29 @@ let dialog = ref({
 });
 let deletionConfirmDialog = ref(false);
 let result = ref("radio-1");
+function startMonthForQuarterToDate(date: any) {
+  const month = date.getMonth()
+  let startMonth = 0
+  if (month < 3) {
+    startMonth = 0 // 一月
+  } else if (month < 6) {
+    startMonth = 3 // 四月
+  } else if (month < 9) {
+    startMonth = 6 // 七月
+  } else {
+    startMonth = 9 // 十月
+  }
+  return startMonth
+}
+function previousMonth(currentDate: any, previous: number) {
+  let firstDay = new Date();
+  firstDay.setDate(1);
+  firstDay.setMonth(firstDay.getMonth() - previous);
+  return [
+    { month: firstDay.getMonth(), year: firstDay.getFullYear() },
+    { month: currentDate.getMonth(), year: currentDate.getFullYear() },
+  ];
+}
 function goToAction(action: string, item?: any) {
   switch (action) {
     case "create":
