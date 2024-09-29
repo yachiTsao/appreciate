@@ -342,7 +342,7 @@ td > a:not(.v-btn):hover {
 }
 .v-custom-data-table {
   border: 2px solid rgba(var(--v-theme-third), 0.7);
-  border-radius: 4px;
+  border-radius: 6px;
   .v-table__wrapper.table-footer--hidden {
     border-top: 2px solid rgba(var(--v-theme-gray-80), 0.6);
     border-right: 2px solid rgba(var(--v-theme-gray-80), 0.6);
