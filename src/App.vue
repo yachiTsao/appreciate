@@ -9,6 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import VNavbar from "./components/Navbar.vue"
+import VNavbar from "./components/Navbar.vue";
 </script>
 <style lang="scss" src="./styles/App.scss"></style>

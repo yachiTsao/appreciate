@@ -6,7 +6,7 @@
 
 // Composablestry {
 
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,8 +50,8 @@ const router = createRouter({
     //   name: "function five",
     //   component: () => import("../pages/FunctionFive.vue"),
     // }
-  ]
-})
+  ],
+});
 
 router.beforeEach(async (to) => {
   // if (to.meta && to.meta.name) {
@@ -61,6 +61,6 @@ router.beforeEach(async (to) => {
   //     document.title = to.meta.name + ' | Atlas 2.0'
   //   }
   // }
-})
+});
 
-export default router
+export default router;

@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" persistent :max-width="width" scrollable scroll-strategy="reposition">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      :max-width="width"
+      scrollable
+      scroll-strategy="reposition"
+    >
       <v-card elevation="16">
         <v-card-title class="pa-0">
           <v-sheet
@@ -37,52 +43,52 @@
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
-import { ref, toRefs, watch, computed } from 'vue'
+import { ref, toRefs, watch, computed } from "vue";
 interface Props {
-  width?: string | number
-  value?: boolean
-  headerColor?: string
-  bodyColor?: string
-  closeIcon?: boolean
-  hideActions?: boolean
+  width?: string | number;
+  value?: boolean;
+  headerColor?: string;
+  bodyColor?: string;
+  closeIcon?: boolean;
+  hideActions?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   width: () => 465,
   value: () => false,
-  headerColor: () => 'primary',
-  bodyColor: () => 'second',
+  headerColor: () => "primary",
+  bodyColor: () => "primary-light",
   closeIcon: () => true,
-  hideActions: () => false
-})
+  hideActions: () => false,
+});
 const emit = defineEmits<{
-  (e: 'update:value', value: boolean): void
-  (e: 'close', value: boolean): void
-}>()
-let dialog = ref(false)
-const value = toRefs(props).value
+  (e: "update:value", value: boolean): void;
+  (e: "close", value: boolean): void;
+}>();
+let dialog = ref(false);
+const value = toRefs(props).value;
 const handleCloseIconClick = () => {
-  dialog.value = false
-  emit('update:value', false)
-  emit('close', true) // 向父元件發送事件
-}
+  dialog.value = false;
+  emit("update:value", false);
+  emit("close", true); // 向父元件發送事件
+};
 watch(
   value,
   (newVal) => {
     // Initial value for showing or hiding the alert applied from the parent component
-    dialog.value = newVal
+    dialog.value = newVal;
   },
   {
     deep: true,
-    immediate: true
-  }
-)
+    immediate: true,
+  },
+);
 </script>
 <style lang="scss" scoped>
 .dialog-actions {
-  background-color: rgba(var(--v-theme-second));
+  background-color: rgba(var(--v-theme-primary-light));
 }
 </style>

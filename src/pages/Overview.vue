@@ -15,8 +15,8 @@
         />
         <v-row class="ma-0">
           <v-col class="ps-0">
-            <v-sheet color="third" class="pa-4">
-              <p class="v-text-h3">Monthly Total Cost</p>
+            <v-sheet color="primary-light" class="pa-4" rounded>
+              <p class="v-text-h3 text-primary-dark">Monthly Total Cost</p>
               <v-layout>
                 <VPieChart
                   :data="pieData"
@@ -29,8 +29,8 @@
             </v-sheet>
           </v-col>
           <v-col class="pe-0">
-            <v-sheet color="third" class="pa-4">
-              <p class="v-text-h3">Cost & Budget</p>
+            <v-sheet color="primary-light" class="pa-4" rounded>
+              <p class="v-text-h3 text-primary-dark">Cost & Budget</p>
               <v-row>
                 <v-col>
                   <v-row
@@ -38,7 +38,7 @@
                     :key="index"
                     class="ma-0 mt-8"
                   >
-                    <v-sheet color="fourth" width="5" height="55"></v-sheet>
+                    <v-sheet color="second" width="5" height="55"></v-sheet>
                     <div class="px-3 d-flex flex-column align-self-center">
                       <p class="text-sixth">{{ item.title }}</p>
                       <p class="v-text-body-4">
@@ -69,12 +69,12 @@
           </v-col>
         </v-row>
         <v-row class="ma-0">
-          <v-sheet color="third" class="pa-4 my-3" width="100%">
+          <v-sheet color="primary-light" class="pa-4 my-3" width="100%" rounded>
             <div class="d-flex align-center">
-              <p class="v-text-h3 pr-2">Monthly Growth</p>
+              <p class="v-text-h3 pr-2 text-primary-dark">Monthly Growth</p>
               <v-sheet
-                color="primary"
-                class="pa-2 v-text-body-2"
+                color="fourth"
+                class="pa-2 v-text-body-2 text-primary-dark"
                 width="fit-content"
                 height="fit-content"
                 rounded="xl"
@@ -92,8 +92,8 @@
           </v-sheet>
         </v-row>
         <v-row class="ma-0">
-          <v-sheet color="third" class="pa-4 my-3" width="100%">
-            <p class="v-text-h3">Need & Must</p>
+          <v-sheet color="primary-light" class="pa-4 my-3" width="100%" rounded>
+            <p class="v-text-h3 text-primary-dark">Need & Must</p>
             <v-layout>
               <VLineChart
                 :chartData="lineData"
@@ -180,26 +180,27 @@ const filterDate = ref({
         disabled: false,
       },
       {
-          text: 'general.periodSelect.quarterToDate',
-          value: 'quarterToDate',
-          month: [
-            { month: startMonthForQuarterToDate(today), year: today.getFullYear() },
-            { month: today.getMonth(), year: today.getFullYear() }
-          ],
-          disabled:
-            [0, 3, 6, 9].includes(today.getMonth())
-              ? true
-              : false
-        },
-        {
-          text: 'general.periodSelect.yearToDate',
-          value: 'yearToDate',
-          month: [
-            { month: 0, year: today.getFullYear() },
-            { month: today.getMonth(), year: today.getFullYear() }
-          ],
-          disabled: today.getMonth() === 0 || today.getMonth() === 0 ? true : false
-        },
+        text: "general.periodSelect.quarterToDate",
+        value: "quarterToDate",
+        month: [
+          {
+            month: startMonthForQuarterToDate(today),
+            year: today.getFullYear(),
+          },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled: [0, 3, 6, 9].includes(today.getMonth()) ? true : false,
+      },
+      {
+        text: "general.periodSelect.yearToDate",
+        value: "yearToDate",
+        month: [
+          { month: 0, year: today.getFullYear() },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled:
+          today.getMonth() === 0 || today.getMonth() === 0 ? true : false,
+      },
     ],
   },
   type: { isUse: false },
@@ -254,18 +255,18 @@ let lineData = ref([
   },
 ]);
 function startMonthForQuarterToDate(date: any) {
-  const month = date.getMonth()
-  let startMonth = 0
+  const month = date.getMonth();
+  let startMonth = 0;
   if (month < 3) {
-    startMonth = 0 // 一月
+    startMonth = 0; // 一月
   } else if (month < 6) {
-    startMonth = 3 // 四月
+    startMonth = 3; // 四月
   } else if (month < 9) {
-    startMonth = 6 // 七月
+    startMonth = 6; // 七月
   } else {
-    startMonth = 9 // 十月
+    startMonth = 9; // 十月
   }
-  return startMonth
+  return startMonth;
 }
 function previousMonth(currentDate: any, previous: number) {
   let firstDay = new Date();

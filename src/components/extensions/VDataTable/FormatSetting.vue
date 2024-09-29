@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-btn class="mx-1 px-2" :color="action.color" variant="outlined" :disabled="disabled">
+    <v-btn
+      class="mx-1 px-2"
+      :color="action.color"
+      variant="outlined"
+      :disabled="disabled"
+    >
       <v-icon class="mr-1" size="20">{{ action.icon }}</v-icon>
       {{ $t(action.title) }}
     </v-btn>
@@ -9,31 +14,31 @@
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from "vue";
 interface Props {
-  item: string
+  item: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-  item: () => ''
-})
+  item: () => "",
+});
 const action = {
-  icon: 'mdi-file-code-outline',
-  color: 'primary-blue',
-  title: 'product.product.application'
-}
-const disabled = ref(false)
+  icon: "mdi-file-code-outline",
+  color: "primary-blue",
+  title: "product.product.application",
+};
+const disabled = ref(false);
 function isDisable() {
   if (props.item.length === 0) {
-    disabled.value = true
+    disabled.value = true;
   }
 }
 onMounted(async () => {
-  isDisable()
-})
+  isDisable();
+});
 // const props = withDefaults(defineProps<Props>(), {
 //   actions: () => []
 // })

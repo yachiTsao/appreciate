@@ -10,49 +10,49 @@ import "vuetify/styles";
 
 // Composables
 import { createVuetify } from "vuetify";
-import type { ThemeDefinition } from 'vuetify/lib/framework'
-import { lightColors, darkColors } from '../theme'
+import type { ThemeDefinition } from "vuetify/lib/framework";
+import { lightColors, darkColors } from "../theme";
 
 const lightTheme: ThemeDefinition = {
   dark: false,
-  colors: lightColors
-}
+  colors: lightColors,
+};
 
 const darkTheme: ThemeDefinition = {
   dark: true,
-  colors: darkColors
-}
+  colors: darkColors,
+};
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: 'darkTheme',
+    defaultTheme: "darkTheme",
     variations: {
-      colors: ['primary-blue', 'gray-60'],
+      colors: ["primary-blue", "gray-60"],
       lighten: 1,
-      darken: 2
+      darken: 2,
     },
     themes: {
       darkTheme,
-      lightTheme
-    }
+      lightTheme,
+    },
   },
   defaults: {
     VBtn: {
       elevation: 0,
-      class: 'text-none',
+      class: "text-none",
       style: {
-        'letter-spacing': 'normal'
-      }
+        "letter-spacing": "normal",
+      },
     },
     VListItemTitle: {
-      class: 'v-text-body-2'
+      class: "v-text-body-2",
     },
     VListItem: {
-      class: 'v-text-body-2',
+      class: "v-text-body-2",
       style: {
-        'min-height': '36px'
-      }
+        "min-height": "36px",
+      },
     },
-  }
+  },
 });

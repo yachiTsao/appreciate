@@ -1,33 +1,34 @@
 <template>
   <p>
-    <span v-if="prependText">$</span> {{ props.item.list_price }} <span v-if="appendText">%</span>
+    <span v-if="prependText">$</span> {{ props.item.list_price }}
+    <span v-if="appendText">%</span>
   </p>
 </template>
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from "vue";
 interface Props {
-  item: any
+  item: any;
 }
 const props = withDefaults(defineProps<Props>(), {
-  item: () => {}
-})
-let prependText = ref(false)
-let appendText = ref(false)
+  item: () => {},
+});
+let prependText = ref(false);
+let appendText = ref(false);
 function format() {
-  if (props.item.charge_type_code === 'FIXED') {
-    return (prependText.value = true)
+  if (props.item.charge_type_code === "FIXED") {
+    return (prependText.value = true);
   } else {
-    return (appendText.value = true)
+    return (appendText.value = true);
   }
 }
 onMounted(async () => {
-  format()
-})
+  format();
+});
 </script>
 <style lang="scss" scoped></style>

@@ -10,7 +10,7 @@
             <VCustomCard :color="'fifth'" class="custom-card">
               <template #content>
                 <div
-                  class="fill-height d-flex align-start justify-center flex-column text-gray-0"
+                  class="fill-height d-flex align-start justify-center flex-column text-primary-dark"
                 >
                   <v-row class="ma-0 px-4">
                     <v-icon class="pa-5 d-flex align-self-center" size="22"
@@ -55,7 +55,7 @@
           <v-col class="py-0">
             <VCustomCard :color="'fifth'">
               <template #title>
-                <p class="text-fourth">Send us a message</p>
+                <p class="text-primary-dark">Send us a message</p>
               </template>
               <template #content>
                 <v-form ref="form" v-model="isFormValid">
@@ -75,7 +75,7 @@
                     class="px-4 pt-0 pb-4 v-col-12"
                   />
                   <div class="d-flex flex-column px-4">
-                    <p class="v-text-body-2 mb-2 text-fourth">
+                    <p class="v-text-body-2 mb-2 text-primary-dark">
                       {{ $t("general.contactForm.message") }}
                     </p>
                     <v-textarea
@@ -94,7 +94,7 @@
                       color="primary"
                       height="34"
                       :disabled="!isFormValid"
-                      class="mx-4"
+                      class="mx-4 text-primary-dark"
                     >
                       {{ $t("general.contactForm.submit") }}
                     </v-btn>

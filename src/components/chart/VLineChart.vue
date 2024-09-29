@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<Props>(), {
 const { period, chartData, cost, legendFontSize } = toRefs(props);
 const chartRef = ref<InstanceType<typeof VChart> | null>(null);
 const lineOption = ref({
-  color: ['#FFFFFF', '#FF9F5A'],
+  color: ["#FFFFFF", "#FF9F5A"],
   tooltip: {
     trigger: "axis",
     textStyle: {
@@ -76,7 +76,7 @@ const lineOption = ref({
     type: "scroll",
     textStyle: {
       fontSize: legendFontSize.value ?? 11,
-      color: '#FFFFFF',
+      color: "#FFFFFF",
     },
     top: props.top ?? "0",
     align: "auto",

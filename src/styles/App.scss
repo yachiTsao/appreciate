@@ -53,14 +53,14 @@ span,
 }
 // card background & sheet background
 .v-custom-background {
-  background: rgb(var(--v-theme-second), 0.8) !important;
+  background: rgb(var(--v-theme-fifth), 0.8) !important;
 }
 // custom filter & select style
 .v-custom-filter {
   max-width: fit-content;
 }
 .v-custom-filter .v-field {
-  background: rgb(var(--v-theme-primary), 0.6) !important;
+  background: rgb(var(--v-theme-filter-field), 0.6) !important;
 }
 .custom-no-list-item {
   padding: 12px !important;

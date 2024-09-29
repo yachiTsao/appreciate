@@ -1,2 +1,2 @@
-export * from './darkMode'
-export * from './lightMode'
+export * from "./darkMode";
+export * from "./lightMode";

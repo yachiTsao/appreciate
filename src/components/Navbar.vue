@@ -16,38 +16,36 @@
           class="v-text-h3"
         ></v-tab>
       </v-tabs>
-        <div class="pr-2">
-          <v-btn icon @click="toggleTheme">
-            <v-icon>{{
-              darkMode ? "mdi-weather-night" : "mdi-weather-sunny"
-            }}</v-icon>
-          </v-btn>
-        </div>
-        <div
-          class="d-flex align-center justify-end custom-switch-language"
+      <div class="pr-2">
+        <v-btn icon @click="toggleTheme">
+          <v-icon>{{
+            darkMode ? "mdi-weather-night" : "mdi-weather-sunny"
+          }}</v-icon>
+        </v-btn>
+      </div>
+      <div class="d-flex align-center justify-end custom-switch-language">
+        <v-icon size="20" class="pr-2">mdi-web</v-icon>
+        <v-select
+          v-model="lang"
+          :items="langOpts"
+          item-title="title"
+          item-value="value"
+          variant="plain"
+          density="compact"
+          menu-icon=""
+          flat
+          hide-details
+          class="language-list"
         >
-          <v-icon size="20" class="pr-2">mdi-web</v-icon>
-          <v-select
-            v-model="lang"
-            :items="langOpts"
-            item-title="title"
-            item-value="value"
-            variant="plain"
-            density="compact"
-            menu-icon=""
-            flat
-            hide-details
-            class="language-list"
-          >
-            <template v-slot:item="{ props }">
-              <v-list-item
-                v-bind="props"
-                active-class="bg-primary"
-                rounded
-              ></v-list-item>
-            </template>
-          </v-select>
-        </div>
+          <template v-slot:item="{ props }">
+            <v-list-item
+              v-bind="props"
+              active-class="bg-primary"
+              rounded
+            ></v-list-item>
+          </template>
+        </v-select>
+      </div>
     </v-toolbar>
   </div>
 </template>
@@ -55,56 +53,58 @@
 <script setup lang="ts">
 import router from "@/router";
 import { ref, reactive, watch, onMounted } from "vue";
-import { useTheme } from 'vuetify'
+import { useTheme } from "vuetify";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/store";
 import { storeToRefs } from "pinia";
-import { useRoute } from 'vue-router'
+import { useRoute } from "vue-router";
 let { locale } = useI18n();
-let tab = ref('');
-const route = useRoute()
+let tab = ref("");
+const route = useRoute();
 const items = [
   {
     title: "general.home",
     value: "home",
-    path: '/home'
+    path: "/home",
   },
   {
     title: "general.listTitle",
     value: "list",
-    path: '/list'
+    path: "/list",
   },
   {
     title: "general.overviewTitle",
     value: "overview",
-    path: '/overview'
+    path: "/overview",
   },
   {
     title: "general.contactTitle",
     value: "contact",
-    path: '/contact'
-  }
+    path: "/contact",
+  },
 ];
 const authStore = useAuthStore();
 const { lang: authLang, theme: authTheme } = storeToRefs(authStore);
-let lang = ref(authLang)
-let theme = useTheme()
-let themeMode = ref(authTheme)
-let darkMode = themeMode.value === 'Dark'
+let lang = ref(authLang);
+let theme = useTheme();
+let themeMode = ref(authTheme);
+let darkMode = themeMode.value === "Dark";
 const langOpts = reactive([
   { value: "en-US", title: "English" },
   { value: "zh-TW", title: "中文(繁體)" },
   { value: "zh-CN", title: "中文(簡體)" },
-])
+]);
 function toggleTheme() {
-  theme.global.name.value = theme.global.current.value.dark ? 'lightTheme' : 'darkTheme'
-  darkMode = theme.global.name.value === 'darkTheme'
-  localStorage.setItem("theme", darkMode ? 'Dark' : 'Light')
+  theme.global.name.value = theme.global.current.value.dark
+    ? "lightTheme"
+    : "darkTheme";
+  darkMode = theme.global.name.value === "darkTheme";
+  localStorage.setItem("theme", darkMode ? "Dark" : "Light");
 }
 function initTab() {
-  tab.value = localStorage.getItem("tab") ?? 'home'
+  tab.value = localStorage.getItem("tab") ?? "home";
 }
-watch(  
+watch(
   lang,
   (newVal) => {
     localStorage.setItem("lang", newVal);
@@ -112,16 +112,17 @@ watch(
   },
   {
     immediate: true,
-  }
-)
-watch (tab, (newVal) => {
-  router.push(`/${newVal.toLowerCase()}`)
-  localStorage.setItem("tab", newVal.toLowerCase())
-})
+  },
+);
+watch(tab, (newVal) => {
+  router.push(`/${newVal.toLowerCase()}`);
+  localStorage.setItem("tab", newVal.toLowerCase());
+});
 onMounted(() => {
-  initTab()
-  theme.global.name.value = themeMode.value === 'Dark' ? 'darkTheme' : 'lightTheme'
-})
+  initTab();
+  theme.global.name.value =
+    themeMode.value === "Dark" ? "darkTheme" : "lightTheme";
+});
 </script>
 <style lang="scss" scoped>
 .language-list .v-field__input {
@@ -140,7 +141,7 @@ onMounted(() => {
 .custom-switch-language {
   min-width: 8vw;
 }
-.v-btn.v-btn--density-default{
+.v-btn.v-btn--density-default {
   height: 48px;
 }
 </style>

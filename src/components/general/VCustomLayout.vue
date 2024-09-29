@@ -9,9 +9,9 @@
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
-import { ref } from 'vue'
+import { ref } from "vue";
 </script>

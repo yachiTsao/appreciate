@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import MarkdownTest from "./MarkdownTest.vue"
-let isShowMarkdown = ref(false)
+import { ref } from "vue";
+import MarkdownTest from "./MarkdownTest.vue";
+let isShowMarkdown = ref(false);
 </script>

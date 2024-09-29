@@ -6,7 +6,7 @@
     persistent
     scroll-strategy="reposition"
   >
-    <v-card class="pa-5 pt-4" color="third">
+    <v-card class="pa-5 pt-4" color="primary-light">
       <div class="d-flex justify-end">
         <v-btn
           variant="text"
@@ -20,22 +20,22 @@
       <div>
         <div class="d-flex flex-column align-center">
           <v-icon color="error" size="56" class="mb-3">mdi-information</v-icon>
-          <p class="v-text-h3 mb-3 text-fourth">
-            {{ $t('general.deletionDialog.title') }}
+          <p class="v-text-h3 mb-3 text-gray-0">
+            {{ $t("general.deletionDialog.title") }}
           </p>
           <p class="mb-6 v-text-body-2 text-center">
-            {{ context ? $t(context) : $t('general.deletionDialog.context') }}
+            {{ context ? $t(context) : $t("general.deletionDialog.context") }}
           </p>
         </div>
         <v-row class="ma-0 align-center justify-center">
           <v-btn
             class="mr-3"
             height="34"
-            color="fourth"
+            color="second"
             variant="outlined"
             @click="handleCloseClick()"
           >
-            {{ $t('general.cancel') }}
+            {{ $t("general.cancel") }}
           </v-btn>
           <v-btn
             height="34"
@@ -44,7 +44,7 @@
             :loading="loading"
             @click="handleDeleteClick()"
           >
-            {{ $t('general.deleted') }}
+            {{ $t("general.deleted") }}
           </v-btn>
         </v-row>
       </div>
@@ -54,41 +54,41 @@
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
-import { ref, toRefs, watch } from 'vue'
+import { ref, toRefs, watch } from "vue";
 interface Props {
-  value?: boolean //由父元件決定此元件的開關
-  loading?: boolean
-  context?: string
+  value?: boolean; //由父元件決定此元件的開關
+  loading?: boolean;
+  context?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   value: () => false,
   loading: () => false,
-  context: () => ''
-})
-const emit = defineEmits(['delete', 'close'])
-let showDialog = ref(false)
-const value = toRefs(props).value
+  context: () => "",
+});
+const emit = defineEmits(["delete", "close"]);
+let showDialog = ref(false);
+const value = toRefs(props).value;
 const handleDeleteClick = () => {
   // 向父元件發送事件
-  emit('delete', true)
-}
+  emit("delete", true);
+};
 const handleCloseClick = () => {
   // 向父元件發送事件
-  emit('close', true)
-}
+  emit("close", true);
+};
 watch(
   value,
   (newVal) => {
     // Initial value for showing or hiding the alert applied from the parent component
-    showDialog.value = newVal
+    showDialog.value = newVal;
   },
   {
     deep: true,
-    immediate: true
-  }
-)
+    immediate: true,
+  },
+);
 </script>

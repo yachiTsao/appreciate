@@ -5,7 +5,7 @@
         <div class="d-flex justify-space-between pa-4">
           <p>{{ $t("general.list") }}</p>
           <v-btn
-            class="mx-1 px-2"
+            class="mx-1 px-2 text-primary-dark"
             variant="flat"
             color="primary"
             @click="goToAction('create')"
@@ -22,6 +22,7 @@
           @change="(v) => (filterForSearch = v)"
           @search="search()"
         />
+        <!-- <v-sheet rounded color="primaryWhite" class="pa-2"> -->
         <VDataTable
           :headers="headers"
           :items="items"
@@ -30,6 +31,7 @@
           @viewItem="(val) => goToAction('view', val)"
           @deleteItem="(val) => goToAction('delete', val)"
         />
+        <!-- </v-sheet> -->
       </v-sheet>
     </v-card>
     <VDialogLayout v-model:value="dialog.show" @close="closeDialog()">
@@ -129,7 +131,9 @@
             :text="tempItem.type"
           />
           <div v-else>
-            <p class="v-text-body-2 text-fourth">{{ $t("general.type") }}</p>
+            <p class="v-text-body-2 text-primary-dark">
+              {{ $t("general.type") }}
+            </p>
             <v-radio-group
               v-model="result"
               inline
@@ -139,12 +143,13 @@
               <v-radio
                 label="Need"
                 value="NEED"
-                class="pr-2"
+                class="pr-2 text-primary-dark"
                 color="sixth"
               ></v-radio>
               <v-radio
                 label="Must"
                 value="MUST"
+                class="text-primary-dark"
                 color="primary-orange"
               ></v-radio>
             </v-radio-group>
@@ -257,31 +262,32 @@ const filterDate = ref({
         disabled: false,
       },
       {
-          text: 'general.periodSelect.quarterToDate',
-          value: 'quarterToDate',
-          month: [
-            { month: startMonthForQuarterToDate(today), year: today.getFullYear() },
-            { month: today.getMonth(), year: today.getFullYear() }
-          ],
-          disabled:
-            [0, 3, 6, 9].includes(today.getMonth())
-              ? true
-              : false
-        },
-        {
-          text: 'general.periodSelect.yearToDate',
-          value: 'yearToDate',
-          month: [
-            { month: 0, year: today.getFullYear() },
-            { month: today.getMonth(), year: today.getFullYear() }
-          ],
-          disabled: today.getMonth() === 0 || today.getMonth() === 0 ? true : false
-        },
+        text: "general.periodSelect.quarterToDate",
+        value: "quarterToDate",
+        month: [
+          {
+            month: startMonthForQuarterToDate(today),
+            year: today.getFullYear(),
+          },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled: [0, 3, 6, 9].includes(today.getMonth()) ? true : false,
+      },
+      {
+        text: "general.periodSelect.yearToDate",
+        value: "yearToDate",
+        month: [
+          { month: 0, year: today.getFullYear() },
+          { month: today.getMonth(), year: today.getFullYear() },
+        ],
+        disabled:
+          today.getMonth() === 0 || today.getMonth() === 0 ? true : false,
+      },
     ],
   },
   type: { isUse: false },
 });
-const filterForSearch = ref([])
+const filterForSearch = ref([]);
 const headers = ref([
   { title: "general.date", align: "start", key: "date" },
   { title: "general.payment", align: "start", key: "payment" },
@@ -346,18 +352,18 @@ let dialog = ref({
 let deletionConfirmDialog = ref(false);
 let result = ref("radio-1");
 function startMonthForQuarterToDate(date: any) {
-  const month = date.getMonth()
-  let startMonth = 0
+  const month = date.getMonth();
+  let startMonth = 0;
   if (month < 3) {
-    startMonth = 0 // 一月
+    startMonth = 0; // 一月
   } else if (month < 6) {
-    startMonth = 3 // 四月
+    startMonth = 3; // 四月
   } else if (month < 9) {
-    startMonth = 6 // 七月
+    startMonth = 6; // 七月
   } else {
-    startMonth = 9 // 十月
+    startMonth = 9; // 十月
   }
-  return startMonth
+  return startMonth;
 }
 function previousMonth(currentDate: any, previous: number) {
   let firstDay = new Date();

@@ -14,48 +14,48 @@
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 interface Props {
-  item: any
+  item: any;
 }
 const props = withDefaults(defineProps<Props>(), {
-  item: () => []
-})
-let switchStatus = ref(false)
-let disable = ref(false)
-const emit = defineEmits(['change'])
+  item: () => [],
+});
+let switchStatus = ref(false);
+let disable = ref(false);
+const emit = defineEmits(["change"]);
 function productStatus(item: string | number) {
   switch (item.toString()) {
-    case '1':
-      switchStatus.value = true
-      disable.value = false
-      break
-    case '0':
-      switchStatus.value = false
-      disable.value = false
-      break
+    case "1":
+      switchStatus.value = true;
+      disable.value = false;
+      break;
+    case "0":
+      switchStatus.value = false;
+      disable.value = false;
+      break;
     default:
-      switchStatus.value = false
-      disable.value = true
-      break
+      switchStatus.value = false;
+      disable.value = true;
+      break;
   }
 }
 const changeStatus = (item: any) => {
   if (switchStatus.value) {
-    item.display = 1
-    emit('change', item)
+    item.display = 1;
+    emit("change", item);
   } else {
-    item.display = 0
-    emit('change', item)
+    item.display = 0;
+    emit("change", item);
   }
-}
+};
 onMounted(async () => {
-  productStatus(props.item.display)
-})
+  productStatus(props.item.display);
+});
 </script>
 <style lang="scss">
 .v-custom-switch.v-switch--inset .v-selection-control--dirty .v-switch__thumb {

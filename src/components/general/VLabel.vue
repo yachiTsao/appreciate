@@ -28,28 +28,28 @@
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
 interface Props {
-  title?: string
-  prefix?: string | number
-  suffix?: string | number
-  text?: string | number
-  color?: string
-  height?: string | number
-  fontSize?: string | number
-  titleColor?: string
+  title?: string;
+  prefix?: string | number;
+  suffix?: string | number;
+  text?: string | number;
+  color?: string;
+  height?: string | number;
+  fontSize?: string | number;
+  titleColor?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-  title: () => '',
-  prefix: () => '',
-  suffix: () => ':',
-  text: () => '',
-  color: () => 'label',
+  title: () => "",
+  prefix: () => "",
+  suffix: () => ":",
+  text: () => "",
+  color: () => "label",
   height: () => 36,
-  fontSize: () => 'v-text-body-2',
-  titleColor: () => 'text-fourth'
-})
+  fontSize: () => "v-text-body-2",
+  titleColor: () => "text-primary-dark",
+});
 </script>

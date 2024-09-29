@@ -22,16 +22,16 @@
 <script setup lang="ts">
 try {
   // a section that will not raise exception
-  let strCode = 'TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk'
+  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
 } catch (e) {
-  console.log('TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk')
+  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
 }
-import { convertCamelCaseToSpaceSeparated } from '@/utils/mixinTools'
+import { convertCamelCaseToSpaceSeparated } from "@/utils/mixinTools";
 interface Props {
-  item: string[]
+  item: string[];
 }
 const props = withDefaults(defineProps<Props>(), {
-  item: () => []
-})
+  item: () => [],
+});
 </script>
 <style lang="scss" scoped></style>
