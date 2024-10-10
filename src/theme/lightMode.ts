@@ -23,6 +23,10 @@ const {
   fourth,
   fifth,
   sixth,
+  seventh,
+  eighth,
+  ninth,
+  tenth,
 }: ColorVariables = {
   primaryBlue: "#7EB3F9",
   primaryDarkBlue: "#003A70",
@@ -47,6 +51,10 @@ const {
   fourth: "#FFEC8B",
   fifth: "#FFF9C4",
   sixth: "#446199",
+  seventh: "#ABC270",
+  eighth: "#FEC868",
+  ninth: "#FEC9A3",
+  tenth: "#CCB5A0",
 };
 
 export const lightColors = {
@@ -60,6 +68,10 @@ export const lightColors = {
   fourth: fourth,
   fifth: fifth,
   sixth: sixth,
+  seventh: seventh,
+  eighth: eighth,
+  ninth: ninth,
+  tenth: tenth,
   "filter-field": second,
   "filter-background": primaryLight,
   "filter-footer": second,
@@ -145,4 +157,5 @@ export const lightColors = {
   "on-datepicker": primaryDark,
   dateheader: fourth,
   "on-dateheader": primaryDark,
+  bluetext: primaryDarkBlue,
 };

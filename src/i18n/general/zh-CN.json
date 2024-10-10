@@ -8,6 +8,7 @@
   "contactTitle": "联系我们",
   "functionFive": "功能五",
   "create": "创建",
+  "createBudget": "创建預算",
   "view": "查看",
   "edit": "编辑",
   "deleted": "删除",
@@ -65,5 +66,17 @@
     "message": "信息",
     "messagePlaceholder": "请输入您的信息",
     "submit": "提交"
+  },
+  "monthlyBudget": "每月预算",
+  "cardTitle": {
+    "expenses": "本月支出",
+    "income": "本月收入",
+    "available": "本月可用"
+  },
+  "periodTitle": {
+    "today": "本日",
+    "lastWeek": "本週",
+    "thisMonth": "本月",
+    "thisYear": "本年至今"
   }
 }

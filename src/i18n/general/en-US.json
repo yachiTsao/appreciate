@@ -8,6 +8,7 @@
   "contactTitle": "CONTACT",
   "functionFive": "function five",
   "create": "Create",
+  "createBudget": "Create Budget",
   "view": "View",
   "edit": "Edit",
   "deleted": "Delete",
@@ -65,5 +66,17 @@
     "message": "Message",
     "messagePlaceholder": "Please enter your message",
     "submit": "Submit"
+  },
+  "monthlyBudget": "Monthly Budget",
+  "cardTitle": {
+    "expenses": "Expenses for this month",
+    "income": "Income for this month",
+    "available": "Available for this month"
+  },
+  "periodTitle": {
+    "today": "Today",
+    "lastWeek": "This Week",
+    "thisMonth": "This Month",
+    "thisYear": "This Year"
   }
 }
