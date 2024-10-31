@@ -56,7 +56,12 @@
   "list": "List",
   "overview": "Overview",
   "contactUs": "Contact Us",
+  "contactInfo": {
+    "address": "address",
+    "hours": "Business Hours"
+  },
   "contactForm": {
+    "title": "Send us a message",
     "name": "Name",
     "namePlaceholder": "Please enter your name",
     "email": "Email",

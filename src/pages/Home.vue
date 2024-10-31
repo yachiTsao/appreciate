@@ -5,17 +5,17 @@
         <div class="d-flex justify-space-between pa-4 pb-0">
           <p class="d-flex align-start pt-2">{{ $t("general.landingPage") }}</p>
           <v-row class="d-flex align-start justify-end ma-0">
-            <v-col cols="4" class="pa-0 pr-2">
               <v-text-field
                 :label="$t('general.monthlyBudget')"
                 variant="outlined"
-                width="400"
+                max-width="200"
                 density="compact"
+                class="pr-2"
               ></v-text-field>
-            </v-col>
             <v-btn
-              class="px-2 mt-1 text-primary-dark"
+              class="px-3 text-primary-dark"
               variant="flat"
+              height="40"
               color="primary"
             >
               <v-icon class="mr-1" size="20"> mdi-pencil-plus-outline </v-icon>
@@ -31,7 +31,7 @@
             height="70"
             width="100%"
           >
-            <v-icon size="20" class="px-3">{{ item.icon }}</v-icon>
+            <v-icon size="20" class="px-4">{{ item.icon }}</v-icon>
             <p class="v-text-h3 pr-4">{{ $t(item.title) }}</p>
             <p :class="`text-${item.textColor}`" class="pr-2 ms-auto">
               $
@@ -57,13 +57,13 @@
               {{ item.period }}
             </p>
             <div class="flex-column ms-auto pr-2">
-              <p class="text-highlight-red">
+              <p class="text-highlight-red text-right">
                 -
                 {{
                   item.expense.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
                 }}
               </p>
-              <p class="text-bluetext">
+              <p class="text-bluetext text-right">
                 +
                 {{
                   item.income.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
@@ -98,7 +98,7 @@ const cardInfo = ref([
     textColor: "bluetext",
   },
   {
-    icon: "mdi-account-arrow-left-outline",
+    icon: "mdi-account-cash-outline",
     title: "general.cardTitle.available",
     value: 17418,
     textColor: "highlight-green",

@@ -5,8 +5,9 @@
         <div class="d-flex justify-space-between pa-4">
           <p>{{ $t("general.list") }}</p>
           <v-btn
-            class="mx-1 px-2 text-primary-dark"
+            class="px-3 text-primary-dark"
             variant="flat"
+            height="40"
             color="primary"
             @click="goToAction('create')"
           >
