@@ -23,16 +23,14 @@
           @change="(v) => (filterForSearch = v)"
           @search="search()"
         />
-        <!-- <v-sheet rounded color="primaryWhite" class="pa-2"> -->
         <VDataTable
           :headers="headers"
-          :items="items"
+          :items="convertedItems"
           :fixed-last-column="true"
           :actions="['view', 'delete']"
           @viewItem="(val) => goToAction('view', val)"
           @deleteItem="(val) => goToAction('delete', val)"
         />
-        <!-- </v-sheet> -->
       </v-sheet>
     </v-card>
     <VDialogLayout v-model:value="dialog.show" @close="closeDialog()">
@@ -56,12 +54,35 @@
             suffix=""
             :text="tempItem.date"
           />
-          <VTextInput
-            v-else
-            :displayName="'general.date'"
-            :init-value="tempItem.date"
-            class="pa-0 pb-2 v-col-12"
-          />
+          <p
+            v-if="dialog.type !== 'view'"
+            class="v-text-body-1 mb-2 text-primary-dark"
+          >
+            {{ $t("general.date") }}
+          </p>
+          <Datepicker
+            v-if="dialog.type !== 'view'"
+            ref="datePicker"
+            v-model="date"
+            :format="formatDate"
+            :enable-time-picker="false"
+            :clearable="false"
+            :start-date="today"
+            hide-input-icon
+            :dark="authTheme === 'Dark'"
+            class="custom-date-picker pb-2"
+          >
+            <template #action-row="{}">
+              <div class="d-flex justify-space-between">
+                <button class="cancel-button" @click="close()">
+                  {{ $t("general.periodSelect.cancel") }}
+                </button>
+                <button class="apply-button" @click="applyDate()">
+                  {{ $t("general.periodSelect.apply") }}
+                </button>
+              </div>
+            </template>
+          </Datepicker>
         </v-row>
         <v-row class="ma-0">
           <v-col class="pa-0 pr-2" cols="12" sm="6">
@@ -69,13 +90,18 @@
               v-if="dialog.type === 'view'"
               :title="'general.payment'"
               suffix=""
-              :text="tempItem.payment"
+              :text="$t(tempItem.payment)"
             />
-            <VTextInput
-              v-else
+            <VSingleSelect
+              v-if="dialog.type !== 'view'"
               :displayName="'general.payment'"
+              :item-title="(item) => $t(item.key)"
+              :item-value="'value'"
+              :items="paymentItems"
               :init-value="tempItem.payment"
-              class="pa-0 pb-2 v-col-12"
+              :search-bar="false"
+              class="pa-0 v-col-12"
+              @change="(v) => (tempItem.payment = v)"
             />
           </v-col>
           <v-col class="pa-0" cols="12" sm="6">
@@ -88,8 +114,10 @@
             <VTextInput
               v-else
               :displayName="'general.dollar'"
+              v-model="tempItem.dollar"
               :init-value="tempItem.dollar"
               class="pa-0 pb-2 v-col-12"
+              @change="(v) => (tempItem.dollar = v)"
             />
           </v-col>
         </v-row>
@@ -99,13 +127,18 @@
             class="pa-0 pb-2 v-col-12"
             :title="'general.category'"
             suffix=""
-            :text="tempItem.category"
+            :text="$t(tempItem.category)"
           />
-          <VTextInput
-            v-else
+          <VSingleSelect
+            v-if="dialog.type !== 'view'"
             :displayName="'general.category'"
+            :item-title="(item) => $t(item.key)"
+            :item-value="'value'"
+            :items="categoryItems"
             :init-value="tempItem.category"
+            :search-bar="false"
             class="pa-0 pb-2 v-col-12"
+            @change="(v) => (tempItem.category = v)"
           />
         </v-row>
         <v-row class="ma-0">
@@ -118,9 +151,11 @@
           />
           <VTextInput
             v-else
+            v-model="tempItem.detail"
             :displayName="'general.detail'"
             :init-value="tempItem.detail"
             class="pa-0 pb-2 v-col-12"
+            @change="(v) => (tempItem.detail = v)"
           />
         </v-row>
         <v-row class="ma-0">
@@ -129,14 +164,14 @@
             class="pa-0 pb-2 v-col-12"
             :title="'general.type'"
             suffix=""
-            :text="tempItem.type"
+            :text="$t(`general.${tempItem.type.toLowerCase()}`)"
           />
           <div v-else>
             <p class="v-text-body-2 text-primary-dark">
               {{ $t("general.type") }}
             </p>
             <v-radio-group
-              v-model="result"
+              v-model="tempItem.type"
               inline
               hide-details
               class="d-flex justify-center"
@@ -159,6 +194,7 @@
       </template>
       <template #actions>
         <v-row align-end justify-end class="ma-0 px-5 pb-5">
+          {{ dialog.type }}
           <v-btn
             height="34"
             block
@@ -169,8 +205,8 @@
               dialog.type === 'view'
                 ? goToAction('edit', tempItem)
                 : dialog.type === 'create'
-                  ? createDetail()
-                  : goToAction('update', tempItem)
+                  ? createDetail(tempItem)
+                  : updateDetail(tempItem)
             "
           >
             {{
@@ -192,19 +228,31 @@
     />
   </div>
 </template>
+
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, watch, ref, computed } from "vue";
 import VDataTable from "@/components/general/VDataTable.vue";
 import VDialogLayout from "@/components/general/VDialogLayout.vue";
 import VDeletionAlert from "@/components/general/VDeletionAlert.vue";
 import VFilterSelectLayout from "@/components/general/VFilterSelectLayout.vue";
 import VLabel from "@/components/general/VLabel.vue";
 import VTextInput from "@/components/general/VTextInput.vue";
+import VSingleSelect from "@/components/general/VSingleSelect.vue";
 import { IInitFilterList } from "@/types";
+import { useAuthStore } from "@/stores/authStore";
+import { useRecordStore } from "@/stores/recordStore";
+import { storeToRefs } from "pinia";
+import Datepicker from "@vuepic/vue-datepicker";
+
 interface FilterItem {
   key: string;
   value: string;
 }
+const authStore = useAuthStore();
+const recordStore = useRecordStore();
+const { theme: authTheme } = storeToRefs(authStore);
+const { convertRecords, getPaymentValues, getCategoryValues } =
+  storeToRefs(recordStore);
 let loading = ref(true);
 const today = new Date();
 const filterList = ref<Record<string, (string | FilterItem[])[]>>({
@@ -291,67 +339,56 @@ const filterDate = ref({
 const filterForSearch = ref([]);
 const headers = ref([
   { title: "general.date", align: "start", key: "date" },
-  { title: "general.payment", align: "start", key: "payment" },
+  {
+    title: "general.payment",
+    align: "start",
+    key: "payment",
+    isTranslate: true,
+  },
   { title: "general.dollar", align: "start", key: "dollar" },
-  { title: "general.category", align: "start", key: "category" },
+  {
+    title: "general.category",
+    align: "start",
+    key: "category",
+    isTranslate: true,
+  },
   { title: "general.detail", align: "start", key: "detail" },
   { title: "general.type", align: "start", key: "type", formatType: true },
   { title: "", align: "end", key: "actions", sortable: false },
 ]);
-const items = ref([
-  {
-    id: "000001",
-    date: "2024/07/18",
-    payment: "credit card",
-    detail: "Pizza",
-    category: "dinner",
-    dollar: 50,
-    type: "need",
-  },
-  {
-    id: "000002",
-    date: "2024/07/19",
-    payment: "cash",
-    detail: "滷肉飯",
-    category: "dinner",
-    dollar: 50,
-    type: "must",
-  },
-  {
-    id: "000003",
-    date: "2024/07/20",
-    payment: "cash",
-    detail: "牛肉麵",
-    category: "lunch",
-    dollar: 100,
-    type: "must",
-  },
-  {
-    id: "000004",
-    date: "2024/07/21",
-    payment: "credit card",
-    detail: "麻辣火鍋",
-    category: "dinner",
-    dollar: 200,
-    type: "need",
-  },
-  {
-    id: "000005",
-    date: "2024/07/22",
-    payment: "cash",
-    detail: "炒飯",
-    category: "lunch",
-    dollar: 80,
-    type: "must",
-  },
-]);
+const convertedItems = computed(() => convertRecords.value);
 let tempItem = ref({});
 let dialog = ref({
   show: false,
   type: "view",
 });
 let deletionConfirmDialog = ref(false);
-let result = ref("radio-1");
+const datePicker = ref();
+const date = ref(new Date());
+const formatDate = (date: any) => {
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${year}/${month}/${day}`;
+};
+const paymentItems = computed(() =>
+  getPaymentValues.value.map((value) => ({
+    key: value,
+    value,
+  })),
+);
+const categoryItems = computed(() =>
+  getCategoryValues.value.map((value) => ({
+    key: value,
+    value,
+  })),
+);
+function applyDate() {
+  datePicker.value.selectDate();
+}
+function close() {
+  datePicker.value.closeMenu();
+}
 function startMonthForQuarterToDate(date: any) {
   const month = date.getMonth();
   let startMonth = 0;
@@ -379,6 +416,7 @@ function goToAction(action: string, item?: any) {
   switch (action) {
     case "create":
       tempItem.value = {};
+      date.value = new Date();
       dialog.value = {
         show: true,
         type: "create",
@@ -392,7 +430,8 @@ function goToAction(action: string, item?: any) {
       };
       break;
     case "edit":
-      tempItem.value = item;
+      tempItem.value = { ...item }; // 將 item 複製到 tempItem
+      date.value = new Date(item.date);
       dialog.value = {
         show: true,
         type: "edit",
@@ -403,7 +442,6 @@ function goToAction(action: string, item?: any) {
       deletionConfirmDialog.value = true;
       break;
     default:
-      // update
       dialog.value = {
         show: false,
         type: "",
@@ -411,18 +449,81 @@ function goToAction(action: string, item?: any) {
       break;
   }
 }
-function createDetail() {
+function createDetail(creatItem: any) {
+  creatItem.date = formatDate(date.value);
+  recordStore.addRecord(creatItem);
   dialog.value.show = false;
-  console.log("createDetail");
+}
+function updateDetail(updatedItem: any) {
+  recordStore.updateRecord(updatedItem);
+  dialog.value.show = false;
 }
 function deleteitem() {
+  recordStore.deleteRecord(tempItem.value.id);
   deletionConfirmDialog.value = false;
 }
 function closeDialog() {
   dialog.value.show = false;
   tempItem.value = {};
 }
-setTimeout(() => {
+watch(date, (newDate) => {
+  tempItem.value.date = formatDate(newDate);
+});
+onMounted(async () => {
+  await recordStore.initRecords();
   loading.value = false;
-}, 2000);
+});
 </script>
+
+<style lang="scss">
+.custom-date-picker {
+  .dp__overlay_cell_active,
+  .dp__cell_in_between,
+  .dp__range_end,
+  .dp__range_start,
+  .dp__range_between {
+    font-weight: bold;
+  }
+  .dp__calendar_header_separator {
+    height: 0;
+  }
+  .dp__input {
+    background: rgba(var(--v-theme-third));
+    height: 40px;
+  }
+  .dp__cell_disabled,
+  .dp__overlay_cell_disabled {
+    background: transparent !important;
+    color: rgba(var(--v-theme-gray-0), 0.6) !important;
+  }
+  .dp__cell_disabled:hover,
+  .dp__overlay_cell_disabled:hover {
+    background: transparent !important;
+    color: rgba(var(--v-theme-gray-0), 0.6) !important;
+  }
+  .dp__overlay {
+    height: 210px !important;
+    width: 260px !important;
+  }
+  .dp__action_row {
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 8px;
+  }
+}
+.apply-button {
+  background-color: rgba(var(--v-theme-primary));
+  color: rgba(var(--v-theme-primary-dark));
+  padding: 8px 24px;
+  margin-left: 12px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.cancel-button {
+  color: rgba(var(--v-theme-primary-dark));
+  padding: 8px 20px;
+  border: 1px solid rgba(var(--v-theme-primary-dark));
+  border-radius: 4px;
+  font-size: 12px;
+}
+</style>

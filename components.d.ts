@@ -38,6 +38,7 @@ declare module 'vue' {
     VMultipleGroupSelect: typeof import('./src/components/general/VMultipleGroupSelect.vue')['default']
     VMultipleSelect: typeof import('./src/components/general/VMultipleSelect.vue')['default']
     VPieChart: typeof import('./src/components/chart/VPieChart.vue')['default']
+    VSingleSelect: typeof import('./src/components/general/VSingleSelect.vue')['default']
     VTextInput: typeof import('./src/components/general/VTextInput.vue')['default']
   }
 }

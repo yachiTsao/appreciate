@@ -7,7 +7,7 @@
       rounded="xl"
       class="d-flex align-center justify-center"
     >
-      {{ item }}
+      {{ $t(`general.${String(item).toLowerCase()}`) }}
     </v-sheet>
   </div>
   <p v-else>-</p>
@@ -28,10 +28,10 @@ const props = withDefaults(defineProps<Props>(), {
 let color = "gray-40";
 function adjustColor(item: string | number) {
   switch (item.toString()) {
-    case "must":
+    case "MUST":
       color = "primary-orange";
       break;
-    case "need":
+    case "NEED":
       color = "sixth";
       break;
     default:

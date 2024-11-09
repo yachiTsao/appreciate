@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <VNavbar />
-    <!-- <VSideMenu/> -->
     <v-main>
       <router-view />
     </v-main>

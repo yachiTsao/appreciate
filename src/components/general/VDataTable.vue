@@ -111,6 +111,7 @@
         <slot name="append-custom-actions" :item="item" />
       </div>
       <!-- 預設顯示 -->
+      <span v-else-if="header.isTranslate">{{ $t(item?.[header.key]) }}</span>
       <span v-else>{{ item?.[header.key] }}</span>
     </template>
     <template v-slot:bottom>
@@ -171,12 +172,6 @@
 </template>
 
 <script setup lang="ts">
-try {
-  // a section that will not raise exception
-  let strCode = "TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk";
-} catch (e) {
-  console.log("TfrLsgr.C, owgEydljwkw hfoArxrjb flwhVoohqrogAS.buljb do fk");
-}
 import { computed, ref } from "vue";
 // import { useAuthStore } from '@/stores'
 import { VDataTable } from "vuetify/components/VDataTable";
@@ -211,6 +206,7 @@ interface Header {
   formatSetting?: boolean;
   formatPrice?: boolean;
   sortable?: boolean;
+  isTranslate?: boolean;
 }
 interface Props {
   headers: Array<Header>;

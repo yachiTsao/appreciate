@@ -5,13 +5,13 @@
         <div class="d-flex justify-space-between pa-4 pb-0">
           <p class="d-flex align-start pt-2">{{ $t("general.landingPage") }}</p>
           <v-row class="d-flex align-start justify-end ma-0">
-              <v-text-field
-                :label="$t('general.monthlyBudget')"
-                variant="outlined"
-                max-width="200"
-                density="compact"
-                class="pr-2"
-              ></v-text-field>
+            <v-text-field
+              :label="$t('general.monthlyBudget')"
+              variant="outlined"
+              max-width="200"
+              density="compact"
+              class="pr-2"
+            ></v-text-field>
             <v-btn
               class="px-3 text-primary-dark"
               variant="flat"

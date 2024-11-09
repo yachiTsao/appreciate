@@ -57,9 +57,9 @@
   "overview": "概览",
   "contactUs": "联系我们",
   "contactInfo": {
-  "address": "地址",
-  "hours": "营业时间"
-},
+    "address": "地址",
+    "hours": "营业时间"
+  },
   "contactForm": {
     "title": "发送消息给我们",
     "name": "姓名",
@@ -83,5 +83,25 @@
     "lastWeek": "本週",
     "thisMonth": "本月",
     "thisYear": "本年至今"
-  }
+  },
+  "paymentType": {
+    "cash": "现金",
+    "creditCard": "信用卡",
+    "debitCard": "借记卡",
+    "linePay": "LINE Pay",
+    "applePay": "Apple Pay"
+  },
+  "categoryType": {
+    "breakfast": "早餐",
+    "lunch": "午餐",
+    "dinner": "晚餐",
+    "snack": "零食",
+    "drink": "饮料",
+    "transportation": "交通",
+    "shopping": "购物",
+    "entertainment": "娱乐",
+    "others": "其他"
+  },
+  "need": "需要",
+  "must": "必须"
 }

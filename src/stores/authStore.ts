@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import type { AuthenticationModule } from "../auth";
+import { StoreIdsEnum } from "../enums/StoreIdEnum";
 
 const browserLang: string =
   navigator.language === "en" ? "en-US" : navigator.language;
 export const useAuthStore = defineStore({
-  id: "auth",
+  id: StoreIdsEnum.auth,
   state: (): AuthenticationModule.State => ({
     // initialize state from local storage to enable the user to stay logged in
     user: null,

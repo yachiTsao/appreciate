@@ -17,7 +17,7 @@
                       >mdi-account-box-outline</v-icon
                     >
                     <div class="d-flex align-self-center flex-column">
-                      <span>{{ $t('general.contactUs') }}</span>
+                      <span>{{ $t("general.contactUs") }}</span>
                       <p>(02) 222 333 6666</p>
                     </div>
                   </v-row>
@@ -26,7 +26,7 @@
                       >mdi-email-check-outline</v-icon
                     >
                     <div class="d-flex align-self-center flex-column">
-                      <span>{{ $t('general.contactForm.email') }}</span>
+                      <span>{{ $t("general.contactForm.email") }}</span>
                       <p>Support@example.com</p>
                     </div>
                   </v-row>
@@ -35,7 +35,7 @@
                       >mdi-map-marker-outline</v-icon
                     >
                     <div class="d-flex align-self-center flex-column">
-                      <span>{{ $t('general.contactInfo.address') }}</span>
+                      <span>{{ $t("general.contactInfo.address") }}</span>
                       <p>台北市信義區123號</p>
                     </div>
                   </v-row>
@@ -44,7 +44,7 @@
                       >mdi-store-clock-outline</v-icon
                     >
                     <div class="d-flex align-self-center flex-column">
-                      <span>{{ $t('general.contactInfo.hours') }}</span>
+                      <span>{{ $t("general.contactInfo.hours") }}</span>
                       <p>週一至週五 09:00 - 18:00</p>
                     </div>
                   </v-row>
@@ -55,7 +55,9 @@
           <v-col class="py-0">
             <VCustomCard :color="'fifth'">
               <template #title>
-                <p class="text-primary-dark">{{ $t('general.contactForm.title')}}</p>
+                <p class="text-primary-dark">
+                  {{ $t("general.contactForm.title") }}
+                </p>
               </template>
               <template #content>
                 <v-form ref="form" v-model="isFormValid">

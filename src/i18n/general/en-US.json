@@ -83,5 +83,25 @@
     "lastWeek": "This Week",
     "thisMonth": "This Month",
     "thisYear": "This Year"
-  }
+  },
+  "paymentType": {
+    "cash": "Cash",
+    "creditCard": "Credit Card",
+    "debitCard": "Debit Card",
+    "linePay": "Line Pay",
+    "applePay": "Apple Pay"
+  },
+  "categoryType": {
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "snack": "Snack",
+    "drink": "Drink",
+    "transportation": "Transportation",
+    "shopping": "Shopping",
+    "entertainment": "Entertainment",
+    "others": "Others"
+  },
+  "need": "Need",
+  "must": "Must"
 }

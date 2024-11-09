@@ -17,7 +17,7 @@ const router = createRouter({
     // },
     {
       path: "/",
-      name: "home",
+      name: "landing page",
       component: () => import("../pages/Home.vue"),
     },
     {
@@ -30,11 +30,6 @@ const router = createRouter({
       name: "list",
       component: () => import("../pages/List.vue"),
     },
-    // {
-    //   path: "/detail",
-    //   name: "detail",
-    //   component: () => import("../pages/FunctionTwo.vue"),
-    // },
     {
       path: "/overview",
       name: "overview",
@@ -44,12 +39,7 @@ const router = createRouter({
       path: "/contact",
       name: "contact",
       component: () => import("../pages/Contact.vue"),
-    },
-    // {
-    //   path: "/function/five",
-    //   name: "function five",
-    //   component: () => import("../pages/FunctionFive.vue"),
-    // }
+    }
   ],
 });
 

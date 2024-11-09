@@ -55,11 +55,11 @@ import router from "@/router";
 import { ref, reactive, watch, onMounted } from "vue";
 import { useTheme } from "vuetify";
 import { useI18n } from "vue-i18n";
-import { useAuthStore } from "@/store";
+import { useAuthStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 let { locale } = useI18n();
-let tab = ref("");
+let tab = ref(localStorage.getItem("tab") ?? "home");
 const route = useRoute();
 const items = [
   {
@@ -99,6 +99,7 @@ function toggleTheme() {
     ? "lightTheme"
     : "darkTheme";
   darkMode = theme.global.name.value === "darkTheme";
+  authTheme.value = darkMode ? "Dark" : "Light";
   localStorage.setItem("theme", darkMode ? "Dark" : "Light");
 }
 function initTab() {
@@ -107,6 +108,7 @@ function initTab() {
 watch(
   lang,
   (newVal) => {
+    authLang.value = newVal;
     localStorage.setItem("lang", newVal);
     locale.value = lang.value ? lang.value : newVal;
   },
@@ -114,10 +116,16 @@ watch(
     immediate: true,
   },
 );
-watch(tab, (newVal) => {
-  router.push(`/${newVal.toLowerCase()}`);
-  localStorage.setItem("tab", newVal.toLowerCase());
-});
+watch(
+  tab,
+  (newVal) => {
+    if (newVal && newVal !== "") {
+      router.push(`/${newVal.toLowerCase()}`);
+      localStorage.setItem("tab", newVal.toLowerCase());
+    }
+  },
+  { immediate: true },
+);
 onMounted(() => {
   initTab();
   theme.global.name.value =
