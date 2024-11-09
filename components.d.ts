@@ -17,7 +17,6 @@ declare module 'vue' {
     FormatSwitch: typeof import('./src/components/extensions/VDataTable/FormatSwitch.vue')['default']
     FormatType: typeof import('./src/components/extensions/VDataTable/FormatType.vue')['default']
     MarkdownCard: typeof import('./src/components/MarkdownCard.vue')['default']
-    MarkdownPage: typeof import('./src/components/MarkdownCard.vue')['default']
     MarkdownTest: typeof import('./src/components/MarkdownTest.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
