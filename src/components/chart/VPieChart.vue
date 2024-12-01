@@ -18,6 +18,8 @@ import {
 } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
 import { color } from "@/utils/chartColor.ts";
+import { useI18n } from "vue-i18n";
+
 // import VNoChartData from '@/components/general/VNoChartData.vue'
 use([
   CanvasRenderer,
@@ -42,7 +44,6 @@ interface Props {
   isShowLabel?: boolean;
   isEmptyTrigGray?: boolean;
   tooltipTitle?: string;
-  whatKindFakeData?: "service" | "usageType" | "linkedAccount";
   legendFormatterName?: string;
   centerX?: "75%" | "80%"; // 75% 是 1 row 2 charts 用, 80% 是 1 row 1 chart 用
   theme?: string;
@@ -63,44 +64,14 @@ const data = toRefs(props).data;
 const overflow = toRefs(props).overflow;
 const isShowLabel = toRefs(props).isShowLabel;
 const centerX = toRefs(props).centerX;
-const fakeData: { [key: string]: DataItem[] } = {
-  service: [
-    { name: "EC2", value: 12 },
-    { name: "RDS", value: 12 },
-    { name: "CloudTrail", value: 12 },
-    { name: "ECS", value: 12 },
-    { name: "CloudWatch", value: 8 },
-    { name: "DMS", value: 8 },
-    { name: "ELB", value: 8 },
-    { name: "S3", value: 8 },
-    { name: "SQS", value: 8 },
-    { name: "SMS", value: 12 },
-  ],
-  usageType: [
-    { name: "Fargate-vCPU-Hours:perCPU", value: 12 },
-    { name: "RDS:GP2-Storage", value: 12 },
-    { name: "RDS:ChargedBackupUsage", value: 12 },
-    { name: "Multi-AZUsage:db.m5.xl", value: 12 },
-    { name: "BoxUsage:t3.medium", value: 8 },
-    { name: "Forgate-GB-Hours", value: 8 },
-    { name: "LoadBalabcerUsage", value: 8 },
-    { name: "EBS:VolumeUsage.gp2", value: 8 },
-    { name: "NextGateway-Bytes", value: 8 },
-    { name: "APE1-APiGatewayHttpRequest", value: 12 },
-  ],
-  linkedAccount: [
-    { name: "6923492034823-TEST", value: 50 },
-    { name: "1203189213327-demo", value: 50 },
-  ],
-};
 const isNoDataGrayMode = ref(false);
+const { t } = useI18n();
 
 const resultData = computed(() => {
-  if (props.whatKindFakeData && data.value.length === 0) {
-    return fakeData[props.whatKindFakeData];
-  } else {
-    return data.value;
-  }
+  return data.value.map((item) => ({
+    ...item,
+    name: t(item.name),
+  }));
 });
 watch(data, (newVal) => {
   if (props.legendFormatterName !== "") {

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <p class="mb-2 v-text-body-1" v-if="displayName">{{ $t(displayName) }}</p>
+    <p class="mb-2 v-text-body-1" :class="displayColor" v-if="displayName">
+      {{ $t(displayName) }}
+    </p>
     <v-select
       v-model="selectedItem"
       :items="filteredItem"
@@ -73,6 +75,7 @@ interface Props {
   selectionSuffix?: string;
   rules?: string | boolean;
   error?: boolean;
+  displayColor?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   // displayName: () => '',
@@ -81,6 +84,7 @@ const props = withDefaults(defineProps<Props>(), {
   searchBar: true,
   clear: false, // Clear all already selected items
   rules: true,
+  displayColor: "text-primary-dark",
 });
 const emit = defineEmits<{
   (e: "change", selectedItem: string): void;

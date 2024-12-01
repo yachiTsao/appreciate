@@ -14,3 +14,21 @@ export namespace RecordModule {
     type: string;
   }
 }
+
+export namespace ChartModule {
+  type State = {
+    items: RecordItem[];
+    loading: boolean;
+    filteredItems?: any;
+  };
+
+  interface RecordItem {
+    id: number | string;
+    date: string | null;
+    payment: number | string;
+    category: string;
+    dollar: number | string;
+    detail: string;
+    type: string;
+  }
+}

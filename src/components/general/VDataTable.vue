@@ -285,7 +285,8 @@ td > a:not(.v-btn):hover {
     > thead
     > tr
     > th {
-    box-shadow: inset 0 -1px 0 rgba(var(--v-theme-gray-100), var(--v-border-opacity));
+    box-shadow: inset 0 -1px 0
+      rgba(var(--v-theme-gray-100), var(--v-border-opacity));
   }
   &.v-table {
     background: none;

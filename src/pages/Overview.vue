@@ -14,12 +14,19 @@
           @search="search()"
         />
         <v-row class="ma-0">
-          <v-col class="ps-0">
+          <v-col
+            class="ps-0"
+            :class="{ 'pl-0': mdAndUp, 'px-0': mdAndDown, 'pb-4': mdAndDown }"
+            cols="12"
+            sm="12"
+            md="12"
+            lg="6"
+          >
             <v-sheet color="primary-light" class="pa-4" rounded>
               <p class="v-text-h3 text-primary-dark">Monthly Total Cost</p>
               <v-layout>
                 <VPieChart
-                  :data="pieData"
+                  :data="pieChartStore.chartData"
                   :isShowTooltip="true"
                   :tooltipTitle="tooltipTitle"
                   :theme="chartTheme"
@@ -72,19 +79,20 @@
           <v-sheet color="primary-light" class="pa-4 my-3" width="100%" rounded>
             <div class="d-flex align-center">
               <p class="v-text-h3 pr-2 text-primary-dark">Monthly Growth</p>
-              <v-sheet
-                color="fourth"
-                class="pa-2 v-text-body-2 text-primary-dark"
-                width="fit-content"
-                height="fit-content"
-                rounded="xl"
-                >type of dinner</v-sheet
-              >
+              <VSingleSelect
+                :item-title="(item) => $t(item.key)"
+                :item-value="'value'"
+                :items="categoryItems"
+                :init-value="tempCategory"
+                :search-bar="false"
+                class="py-2 v-col-2"
+                @change="(v) => (tempCategory = v)"
+              />
             </div>
             <v-layout>
               <VBarChart
                 :chartData="barData"
-                :period="['202401', '202402', '202403']"
+                :period="['2024/11', '2024/12']"
                 :height="'300px'"
                 :theme="chartTheme"
               />
@@ -96,9 +104,11 @@
             <p class="v-text-h3 text-primary-dark">Need & Must</p>
             <v-layout>
               <VLineChart
-                :chartData="lineData"
-                :period="['202401', '202402', '202403']"
+                :chartData="lineChartStore.chartData"
+                :tooltipData="lineChartStore.tooltipData"
+                :period="['2024/11', '2024/12']"
                 :height="'300px'"
+                :cost="true"
                 :theme="chartTheme"
               />
             </v-layout>
@@ -109,32 +119,45 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, computed, onMounted } from "vue";
+import { storeToRefs } from "pinia";
 import VPieChart from "@/components/chart/VPieChart.vue";
 import VGaugeChart from "@/components/chart/VGaugeChart.vue";
 import VBarChart from "@/components/chart/VBarChart.vue";
 import VLineChart from "@/components/chart/VLineChart.vue";
-import { useTheme } from "vuetify";
+import VSingleSelect from "@/components/general/VSingleSelect.vue";
+import { useTheme, useDisplay } from "vuetify";
 import { IInitFilterList } from "@/types";
+import { useRecordStore } from "@/stores/recordStore";
+import { usePieChartStore, useLineChartStore } from "@/stores/overviewStore";
 interface FilterItem {
   key: string;
   value: string;
 }
 let theme = useTheme();
+const { mdAndUp, mdAndDown } = useDisplay();
+const recordStore = useRecordStore();
+const pieChartStore = usePieChartStore();
+const lineChartStore = useLineChartStore();
+const { getCategoryValues } = storeToRefs(recordStore);
+const categoryItems = computed(() =>
+  getCategoryValues.value.map((value) => ({
+    key: value,
+    value,
+  })),
+);
+let tempCategory = ref("");
 let systemTheme = ref(theme);
 let chartTheme = ref("darkTheme");
 const today = new Date();
 const filterList = ref<Record<string, (string | FilterItem[])[]>>({
   month: [],
-  type: [],
 });
 const filterDisplayName = {
   month: "general.month",
-  type: "general.type",
 };
 const initFilterList = ref<IInitFilterList>({
   month: previousMonth(today, 6) || [""],
-  type: [],
 });
 const filterDate = ref({
   month: {
@@ -203,14 +226,8 @@ const filterDate = ref({
       },
     ],
   },
-  type: { isUse: false },
 });
-let pieData = [
-  { name: "A", value: 335 },
-  { name: "B", value: 315 },
-  { name: "C", value: 205 },
-];
-let tooltipTitle = "2024/08/27";
+let tooltipTitle = "2024/11";
 let costAndBudget = ref([
   {
     title: "Total Cost",
@@ -231,29 +248,7 @@ let gaugeData = ref([
     isNoData: false,
   },
 ]);
-let barData = ref([12, 34, 43]);
-let lineData = ref([
-  {
-    name: "need",
-    type: "line",
-    symbol: "none",
-    data: [
-      ["202401", 34],
-      ["202402", 79],
-      ["202403", 45],
-    ],
-  },
-  {
-    name: "must",
-    type: "line",
-    symbol: "none",
-    data: [
-      ["202401", 93],
-      ["202402", 95],
-      ["202403", 19],
-    ],
-  },
-]);
+let barData = ref([12, 43]);
 function startMonthForQuarterToDate(date: any) {
   const month = date.getMonth();
   let startMonth = 0;
@@ -287,4 +282,11 @@ watch(
     deep: true,
   },
 );
+onMounted(async () => {
+  if (categoryItems.value.length > 0) {
+    tempCategory.value = categoryItems.value[0].value;
+  }
+  await lineChartStore.aggregatedData();
+  await pieChartStore.initData("2024/11");
+});
 </script>
