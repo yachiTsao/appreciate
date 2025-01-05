@@ -120,7 +120,7 @@ watch(
   tab,
   (newVal) => {
     if (newVal && newVal !== "") {
-      router.push(`/${newVal.toLowerCase()}`);
+      router.push(`/${newVal}`);
       localStorage.setItem("tab", newVal.toLowerCase());
     }
   },

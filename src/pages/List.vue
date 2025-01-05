@@ -90,7 +90,7 @@
               v-if="dialog.type === 'view'"
               :title="'general.payment'"
               suffix=""
-              :text="$t(tempItem.payment)"
+              :text=" $te(tempItem.payment) ? $t(tempItem.payment) : tempItem.payment"
             />
             <VSingleSelect
               v-if="dialog.type !== 'view'"
@@ -100,7 +100,9 @@
               :items="paymentItems"
               :init-value="tempItem.payment"
               :search-bar="false"
+              :rules="singleSelectionValidator(tempItem.payment, 'error')"
               class="pa-0 v-col-12"
+              :class="{ 'pb-6': singleSelectionValidator(tempItem.payment, 'error') }" 
               @change="(v) => (tempItem.payment = v)"
             />
           </v-col>
@@ -127,7 +129,7 @@
             class="pa-0 pb-2 v-col-12"
             :title="'general.category'"
             suffix=""
-            :text="$t(tempItem.category)"
+            :text="$te(tempItem.category) ? $t(tempItem.category) : tempItem.category"
           />
           <VSingleSelect
             v-if="dialog.type !== 'view'"
@@ -164,7 +166,7 @@
             class="pa-0 pb-2 v-col-12"
             :title="'general.type'"
             suffix=""
-            :text="$t(`general.${tempItem.type.toLowerCase()}`)"
+            :text="$te(`general.${tempItem.type}`) ? $t(`general.${tempItem.type}`) : tempItem.type"
           />
           <div v-else>
             <p class="v-text-body-2 text-primary-dark">
@@ -242,6 +244,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { useRecordStore } from "@/stores/recordStore";
 import { storeToRefs } from "pinia";
 import Datepicker from "@vuepic/vue-datepicker";
+import { singleSelectionValidator } from "@/utils/mixinTools"
 
 interface FilterItem {
   key: string;
