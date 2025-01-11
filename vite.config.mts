@@ -1,58 +1,29 @@
-// Plugins
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import Fonts from 'unplugin-fonts/vite';
-import Layouts from 'vite-plugin-vue-layouts';
-import Vue from '@vitejs/plugin-vue';
-import VueRouter from 'unplugin-vue-router/vite';
-import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
+import { fileURLToPath, URL } from 'node:url'
+import path from 'path'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-// Utilities
-import { defineConfig } from 'vite';
-import { fileURLToPath, URL } from 'node:url';
+// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
+import vuetify from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    VueRouter(),
-    Layouts(),
-    Vue({
-      template: { transformAssetUrls },
-    }),
-    Vuetify({
-      autoImport: true,
-      styles: {
-        configFile: 'src/styles/settings.scss',
-      },
-    }),
-    Components(),
-    Fonts({
-      google: {
-        families: [
-          {
-            name: 'Roboto',
-            styles: 'wght@100;300;400;500;700;900',
-          },
-        ],
-      },
-    }),
-    AutoImport({
-      imports: ['vue', 'vue-router'],
-      dts: true,
-      eslintrc: {
-        enabled: true,
-      },
-      vueTemplate: true,
-    }),
-  ],
-  define: { 'process.env': {} },
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
+  envDir: path.resolve(__dirname, './vite_env'),
+  plugins: [vue(), vuetify()],
+  optimizeDeps: {
+    exclude: ['vuetify'] // To prevent reloading
+  },
+  build: {
+    target: 'esnext'
   },
   server: {
-    port: 3000,
+    host: 'localhost',
+    port: 3000
   },
-});
+  resolve: {
+    extensions: ['.mjs', '.js', '.mts', '.ts', '.vue'], // 省略副檔名
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
