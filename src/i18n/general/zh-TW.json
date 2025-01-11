@@ -54,6 +54,9 @@
     "apply": "套用"
   },
   "list": "列表",
+  "singleSelectError": "請選擇一個項目",
+  "textInputError": "請輸入內容",
+  "onlyNumber": "僅允許輸入數字",
   "overview": "概覽",
   "contactUs": "聯繫我們",
   "contactInfo": {

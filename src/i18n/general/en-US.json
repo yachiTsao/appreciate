@@ -54,6 +54,9 @@
     "apply": "Apply"
   },
   "list": "List",
+  "singleSelectError": "Please select one item",
+  "textInputError": "Please enter some content",
+  "onlyNumber": "Only numbers are allowed",
   "overview": "Overview",
   "contactUs": "Contact Us",
   "contactInfo": {

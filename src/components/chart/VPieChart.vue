@@ -65,12 +65,12 @@ const overflow = toRefs(props).overflow;
 const isShowLabel = toRefs(props).isShowLabel;
 const centerX = toRefs(props).centerX;
 const isNoDataGrayMode = ref(false);
-const { t } = useI18n();
+const { t, te } = useI18n();
 
 const resultData = computed(() => {
   return data.value.map((item) => ({
     ...item,
-    name: t(item.name),
+    name: te(item.name) ? t(item.name) : item.name,
   }));
 });
 watch(data, (newVal) => {

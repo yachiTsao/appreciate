@@ -230,6 +230,7 @@ const props = withDefaults(defineProps<Props>(), {
   hideFooter: () => false,
   search: () => "",
   tag: () => "",
+  isTranslate: () => false,
 });
 const emit = defineEmits<{
   (e: "viewItem", rowItem: string[]): void;

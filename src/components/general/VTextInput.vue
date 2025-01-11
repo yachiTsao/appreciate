@@ -35,7 +35,7 @@ interface Props {
   initValue?: any; // Initial selected items
   rules?: string | boolean | Function;
   error?: boolean;
-  hideDetails?: boolean | string;
+  hideDetails?: boolean | "auto" | undefined;
   displayColor?: string;
 }
 const props = withDefaults(defineProps<Props>(), {

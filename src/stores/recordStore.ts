@@ -91,8 +91,16 @@ export const useRecordStore = defineStore({
       );
     },
     async addRecord(record: RecordModule.RecordItem) {
-      this.items.push(record);
-      localStorage.setItem("records", JSON.stringify(this.items));
+      console.log("record", record);
+      for (let key in record) {
+        console.log("key", key);
+        // if(record[key] === "") {
+        //   alert("請填寫完整");
+        //   return;
+        // }
+      }
+      // this.items.push(record);
+      // localStorage.setItem("records", JSON.stringify(this.items));
     },
     async updateRecord(record: RecordModule.RecordItem) {
       const index = this.items.findIndex((item) => item.id === record.id);

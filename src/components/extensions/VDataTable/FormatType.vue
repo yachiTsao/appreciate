@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 let color = "gray-40";
 function adjustColor(item: string | number) {
-  switch (item.toString()) {
+  switch (item && item.toString()) {
     case "MUST":
       color = "primary-orange";
       break;

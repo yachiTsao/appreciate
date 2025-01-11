@@ -117,3 +117,18 @@ export function htmlDecode(text: string): string {
   div.innerHTML = text;
   return div.innerText;
 }
+export function textValidator(
+  value: string | null,
+  errorMessages: { default: string; [key: string]: string },
+  condition?: (value: string) => boolean,
+  conditionKey?: string,
+) {
+  if (!value) {
+    return errorMessages.default;
+  }
+  if (condition && !condition(value)) {
+    const key = conditionKey || "default";
+    return errorMessages[key] || errorMessages.default;
+  }
+  return true;
+}

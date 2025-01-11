@@ -17,7 +17,10 @@
       variant="outlined"
       hide-details="auto"
       density="compact"
-      class="custom-single-select"
+      :class="[
+        'custom-single-select',
+        { 'v-single-select': useVSingleSeclctClass },
+      ]"
       flat
       @blur="handleBlurEvent"
     >
@@ -76,6 +79,7 @@ interface Props {
   rules?: string | boolean;
   error?: boolean;
   displayColor?: string;
+  useVSingleSeclctClass?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   // displayName: () => '',
@@ -85,6 +89,7 @@ const props = withDefaults(defineProps<Props>(), {
   clear: false, // Clear all already selected items
   rules: true,
   displayColor: "text-primary-dark",
+  useVSingleSeclctClass: false,
 });
 const emit = defineEmits<{
   (e: "change", selectedItem: string): void;
