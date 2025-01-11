@@ -54,6 +54,9 @@
     "apply": "应用"
   },
   "list": "列表",
+  "singleSelectError": "请选择一个项目",
+  "textInputError": "请输入内容",
+  "onlyNumber": "仅允许输入数字",
   "overview": "概览",
   "contactUs": "联系我们",
   "contactInfo": {

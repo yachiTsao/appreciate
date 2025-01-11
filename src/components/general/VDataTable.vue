@@ -231,7 +231,7 @@ const props = withDefaults(defineProps<Props>(), {
   search: () => "",
   tag: () => "",
   isTranslate: () => false,
-})
+});
 const emit = defineEmits<{
   (e: "viewItem", rowItem: string[]): void;
   (e: "deleteItem", rowItem: string[]): void;

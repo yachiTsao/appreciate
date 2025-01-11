@@ -46,153 +46,186 @@
         </p>
       </template>
       <template #content>
-        <v-row class="ma-0">
-          <VLabel
-            v-if="dialog.type === 'view'"
-            class="pa-0 pb-2 v-col-12"
-            :title="'general.date'"
-            suffix=""
-            :text="tempItem.date"
-          />
-          <p
-            v-if="dialog.type !== 'view'"
-            class="v-text-body-1 mb-2 text-primary-dark"
-          >
-            {{ $t("general.date") }}
-          </p>
-          <Datepicker
-            v-if="dialog.type !== 'view'"
-            ref="datePicker"
-            v-model="date"
-            :format="formatDate"
-            :enable-time-picker="false"
-            :clearable="false"
-            :start-date="today"
-            hide-input-icon
-            :dark="authTheme === 'Dark'"
-            class="custom-date-picker pb-2"
-          >
-            <template #action-row="{}">
-              <div class="d-flex justify-space-between">
-                <button class="cancel-button" @click="close()">
-                  {{ $t("general.periodSelect.cancel") }}
-                </button>
-                <button class="apply-button" @click="applyDate()">
-                  {{ $t("general.periodSelect.apply") }}
-                </button>
-              </div>
-            </template>
-          </Datepicker>
-        </v-row>
-        <v-row class="ma-0">
-          <v-col class="pa-0 pr-2" cols="12" sm="6">
+        <v-form ref="form" v-model="isFormValid">
+          <v-row class="ma-0">
             <VLabel
               v-if="dialog.type === 'view'"
-              :title="'general.payment'"
+              class="pa-0 pb-2 v-col-12"
+              :title="'general.date'"
               suffix=""
-              :text=" $te(tempItem.payment) ? $t(tempItem.payment) : tempItem.payment"
+              :text="tempItem.date"
+            />
+            <p
+              v-if="dialog.type !== 'view'"
+              class="v-text-body-1 mb-2 text-primary-dark"
+            >
+              {{ $t("general.date") }}
+            </p>
+            <Datepicker
+              v-if="dialog.type !== 'view'"
+              ref="datePicker"
+              v-model="date"
+              :format="formatDate"
+              :enable-time-picker="false"
+              :clearable="false"
+              :start-date="today"
+              hide-input-icon
+              :dark="authTheme === 'Dark'"
+              class="custom-date-picker mb-4"
+            >
+              <template #action-row="{}">
+                <div class="d-flex justify-space-between">
+                  <button class="cancel-button" @click="close()">
+                    {{ $t("general.periodSelect.cancel") }}
+                  </button>
+                  <button class="apply-button" @click="applyDate()">
+                    {{ $t("general.periodSelect.apply") }}
+                  </button>
+                </div>
+              </template>
+            </Datepicker>
+          </v-row>
+          <v-row class="ma-0">
+            <v-col class="pa-0 pr-2" cols="12" sm="6">
+              <VLabel
+                v-if="dialog.type === 'view'"
+                :title="'general.payment'"
+                suffix=""
+                :text="
+                  $te(tempItem.payment)
+                    ? $t(tempItem.payment)
+                    : tempItem.payment
+                "
+              />
+              <VSingleSelect
+                v-if="dialog.type !== 'view'"
+                :displayName="'general.payment'"
+                :item-title="(item) => $t(item.key)"
+                :item-value="'value'"
+                :items="paymentItems"
+                :init-value="tempItem.payment"
+                :search-bar="false"
+                :rules="
+                  singleSelectionValidator(
+                    tempItem.payment,
+                    $t('general.singleSelectError'),
+                  )
+                "
+                @change="(v) => (tempItem.payment = v)"
+              />
+            </v-col>
+            <v-col class="pa-0" cols="12" sm="6">
+              <VLabel
+                v-if="dialog.type === 'view'"
+                :title="'general.dollar'"
+                suffix=""
+                :text="tempItem.dollar"
+              />
+              <VTextInput
+                v-else
+                :displayName="'general.dollar'"
+                v-model="tempItem.dollar"
+                :init-value="tempItem.dollar"
+                :hide-details="false"
+                :rules="
+                  textValidator(
+                    tempItem.dollar,
+                    errorMessages,
+                    () => checkOnlyNumber(tempItem.dollar),
+                    'checkOnlyNumber',
+                  )
+                "
+                @change="(v) => (tempItem.dollar = v)"
+              />
+            </v-col>
+          </v-row>
+          <v-row class="ma-0 pb-5">
+            <VLabel
+              v-if="dialog.type === 'view'"
+              class="pa-0 pb-2 v-col-12"
+              :title="'general.category'"
+              suffix=""
+              :text="
+                $te(tempItem.category)
+                  ? $t(tempItem.category)
+                  : tempItem.category
+              "
             />
             <VSingleSelect
               v-if="dialog.type !== 'view'"
-              :displayName="'general.payment'"
+              :displayName="'general.category'"
               :item-title="(item) => $t(item.key)"
               :item-value="'value'"
-              :items="paymentItems"
-              :init-value="tempItem.payment"
+              :items="categoryItems"
+              :init-value="tempItem.category"
               :search-bar="false"
-              :rules="singleSelectionValidator(tempItem.payment, 'error')"
               class="pa-0 v-col-12"
-              :class="{ 'pb-6': singleSelectionValidator(tempItem.payment, 'error') }" 
-              @change="(v) => (tempItem.payment = v)"
+              :rules="
+                singleSelectionValidator(
+                  tempItem.category,
+                  $t('general.singleSelectError'),
+                )
+              "
+              @change="(v) => (tempItem.category = v)"
             />
-          </v-col>
-          <v-col class="pa-0" cols="12" sm="6">
+          </v-row>
+          <v-row class="ma-0">
             <VLabel
               v-if="dialog.type === 'view'"
-              :title="'general.dollar'"
+              class="pa-0 pb-2 v-col-12"
+              :title="'general.detail'"
               suffix=""
-              :text="tempItem.dollar"
+              :text="tempItem.detail"
             />
             <VTextInput
               v-else
-              :displayName="'general.dollar'"
-              v-model="tempItem.dollar"
-              :init-value="tempItem.dollar"
-              class="pa-0 pb-2 v-col-12"
-              @change="(v) => (tempItem.dollar = v)"
+              v-model="tempItem.detail"
+              :displayName="'general.detail'"
+              :init-value="tempItem.detail"
+              class="pa-0 v-col-12"
+              :hide-details="false"
+              :rules="textValidator(tempItem.detail, errorMessages)"
+              @change="(v) => (tempItem.detail = v)"
             />
-          </v-col>
-        </v-row>
-        <v-row class="ma-0">
-          <VLabel
-            v-if="dialog.type === 'view'"
-            class="pa-0 pb-2 v-col-12"
-            :title="'general.category'"
-            suffix=""
-            :text="$te(tempItem.category) ? $t(tempItem.category) : tempItem.category"
-          />
-          <VSingleSelect
-            v-if="dialog.type !== 'view'"
-            :displayName="'general.category'"
-            :item-title="(item) => $t(item.key)"
-            :item-value="'value'"
-            :items="categoryItems"
-            :init-value="tempItem.category"
-            :search-bar="false"
-            class="pa-0 pb-2 v-col-12"
-            @change="(v) => (tempItem.category = v)"
-          />
-        </v-row>
-        <v-row class="ma-0">
-          <VLabel
-            v-if="dialog.type === 'view'"
-            class="pa-0 pb-2 v-col-12"
-            :title="'general.detail'"
-            suffix=""
-            :text="tempItem.detail"
-          />
-          <VTextInput
-            v-else
-            v-model="tempItem.detail"
-            :displayName="'general.detail'"
-            :init-value="tempItem.detail"
-            class="pa-0 pb-2 v-col-12"
-            @change="(v) => (tempItem.detail = v)"
-          />
-        </v-row>
-        <v-row class="ma-0">
-          <VLabel
-            v-if="dialog.type === 'view'"
-            class="pa-0 pb-2 v-col-12"
-            :title="'general.type'"
-            suffix=""
-            :text="$te(`general.${tempItem.type}`) ? $t(`general.${tempItem.type}`) : tempItem.type"
-          />
-          <div v-else>
-            <p class="v-text-body-2 text-primary-dark">
-              {{ $t("general.type") }}
-            </p>
-            <v-radio-group
-              v-model="tempItem.type"
-              inline
-              hide-details
-              class="d-flex justify-center"
-            >
-              <v-radio
-                label="Need"
-                value="NEED"
-                class="pr-2 text-primary-dark"
-                color="sixth"
-              ></v-radio>
-              <v-radio
-                label="Must"
-                value="MUST"
-                class="text-primary-dark"
-                color="primary-orange"
-              ></v-radio>
-            </v-radio-group>
-          </div>
-        </v-row>
+          </v-row>
+          <v-row class="ma-0 pb-5">
+            <VLabel
+              v-if="dialog.type === 'view'"
+              class="pa-0 v-col-12"
+              :title="'general.type'"
+              suffix=""
+              :text="
+                $te(`general.${tempItem.type}`)
+                  ? $t(`general.${tempItem.type}`)
+                  : tempItem.type
+              "
+            />
+            <div v-else>
+              <p class="v-text-body-2 text-primary-dark">
+                {{ $t("general.type") }}
+              </p>
+              <v-radio-group
+                v-model="tempItem.type"
+                inline
+                hide-details
+                class="d-flex justify-center"
+              >
+                <v-radio
+                  label="Need"
+                  value="NEED"
+                  class="pr-2 text-primary-dark"
+                  color="sixth"
+                ></v-radio>
+                <v-radio
+                  label="Must"
+                  value="MUST"
+                  class="text-primary-dark"
+                  color="primary-orange"
+                ></v-radio>
+              </v-radio-group>
+            </div>
+          </v-row>
+        </v-form>
       </template>
       <template #actions>
         <v-row align-end justify-end class="ma-0 px-5 pb-5">
@@ -202,6 +235,8 @@
             color="primary"
             variant="flat"
             :loading="loading"
+            :disabled="dialog.type !== 'view' && !isFormValid"
+            class="custom-button"
             @click="
               dialog.type === 'view'
                 ? goToAction('edit', tempItem)
@@ -244,7 +279,8 @@ import { useAuthStore } from "@/stores/authStore";
 import { useRecordStore } from "@/stores/recordStore";
 import { storeToRefs } from "pinia";
 import Datepicker from "@vuepic/vue-datepicker";
-import { singleSelectionValidator } from "@/utils/mixinTools"
+import { singleSelectionValidator, textValidator } from "@/utils/mixinTools";
+import { useI18n } from "vue-i18n";
 
 interface FilterItem {
   key: string;
@@ -255,7 +291,9 @@ const recordStore = useRecordStore();
 const { theme: authTheme } = storeToRefs(authStore);
 const { convertRecords, getPaymentValues, getCategoryValues } =
   storeToRefs(recordStore);
+const { t } = useI18n();
 let loading = ref(true);
+let isFormValid = ref(false);
 const today = new Date();
 const filterList = ref<Record<string, (string | FilterItem[])[]>>({
   month: [],
@@ -359,7 +397,14 @@ const headers = ref([
   { title: "", align: "end", key: "actions", sortable: false },
 ]);
 const convertedItems = computed(() => convertRecords.value);
-let tempItem = ref({});
+let tempItem = ref({
+  date: "",
+  payment: "",
+  dollar: "",
+  category: "",
+  detail: "",
+  type: "",
+});
 let dialog = ref({
   show: false,
   type: "view",
@@ -385,6 +430,11 @@ const categoryItems = computed(() =>
     value,
   })),
 );
+const checkOnlyNumber = (value: string): boolean => /^[0-9]*$/.test(value);
+const errorMessages = {
+  default: t("general.textInputError"),
+  checkOnlyNumber: t("general.onlyNumber"),
+};
 function applyDate() {
   datePicker.value.selectDate();
 }
@@ -527,5 +577,11 @@ onMounted(async () => {
   border: 1px solid rgba(var(--v-theme-primary-dark));
   border-radius: 4px;
   font-size: 12px;
+}
+</style>
+<style lang="scss" scoped>
+.custom-button:disabled {
+  background-color: rgba(var(--v-theme-white)) !important;
+  opacity: 0.5 !important;
 }
 </style>

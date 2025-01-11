@@ -92,7 +92,7 @@ export const useRecordStore = defineStore({
     },
     async addRecord(record: RecordModule.RecordItem) {
       console.log("record", record);
-      for(let key in record) {
+      for (let key in record) {
         console.log("key", key);
         // if(record[key] === "") {
         //   alert("請填寫完整");
